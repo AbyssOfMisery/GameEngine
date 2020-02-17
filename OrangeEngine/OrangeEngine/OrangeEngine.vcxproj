@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Actor\Player.h" />
+    <ClInclude Include="include\Component\Command.h" />
+    <ClInclude Include="include\Component\GraphicsComponent.h" />
+    <ClInclude Include="include\Component\HealthComponent.h" />
+    <ClInclude Include="include\Component\InputComponent.h" />
+    <ClInclude Include="include\Component\PhysicsComponent.h" />
+    <ClInclude Include="include\Component\ScriptComponent.h" />
+    <ClInclude Include="include\Debug\SFMLDebugDraw.h" />
+    <ClInclude Include="include\Game\OrangeEngine.h" />
+    <ClInclude Include="include\Manager\ComponentManager.h" />
+    <ClInclude Include="include\Manager\SceneManager.h" />
+    <ClInclude Include="include\Manager\TextureManager.h" />
+    <ClInclude Include="include\RenderWindow\Window.h" />
+    <ClInclude Include="include\Scene\Scene1.h" />
+    <ClInclude Include="include\Utility\Enums.h" />
+    <ClInclude Include="include\Utility\object_pool.h" />
+    <ClInclude Include="include\Utility\String.h" />
+    <ClInclude Include="include\Utility\Util.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="include\Actor\Player.cpp" />
+    <ClCompile Include="include\Component\Command.cpp" />
+    <ClCompile Include="include\Component\GraphicsComponent.cpp" />
+    <ClCompile Include="include\Component\InputComponent.cpp" />
+    <ClCompile Include="include\Component\PhysicsComponent.cpp" />
+    <ClCompile Include="include\Component\ScriptComponent.cpp" />
+    <ClCompile Include="include\Debug\SFMLDebugDraw.cpp" />
+    <ClCompile Include="include\Game\Main.cpp" />
+    <ClCompile Include="include\Game\OrangeEngine.cpp" />
+    <ClCompile Include="include\Imgui\imgui-SFML.cpp" />
+    <ClCompile Include="include\Imgui\imgui.cpp" />
+    <ClCompile Include="include\Imgui\imgui_demo.cpp" />
+    <ClCompile Include="include\Imgui\imgui_draw.cpp" />
+    <ClCompile Include="include\Imgui\imgui_widgets.cpp" />
+    <ClCompile Include="include\Manager\ComponentManager.cpp" />
+    <ClCompile Include="include\Manager\TextureManager.cpp" />
+    <ClCompile Include="include\RenderWindow\Window.cpp" />
+    <ClCompile Include="include\Scene\Scene1.cpp" />
+    <ClCompile Include="include\Utility\object_pool.cpp" />
+    <ClCompile Include="include\Utility\String.cpp" />
+    <ClCompile Include="include\Utility\Util.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="include\Utility\ObjectPool.inl" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{7975317A-DCCF-432A-A774-E5BDA726AACD}</ProjectGuid>
+    <RootNamespace>OrangeEngine</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>$(SolutionDir)LibraryPath\Box2D\include;$(ProjectDir)LibraryPath\LuaPlus;$(ProjectDir)LibraryPath\SFML-2.5.1\include;$(ProjectDir)LibraryPath\LuaPlus\src;$(ProjectDir)LibraryPath\NativeFileDialog\include;$(SolutionDir)LibraryPath\IMGUI;$(SolutionDir)LibraryPath\Nlohmann;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)Lib\LuaPlus;$(ProjectDir)Lib\IMGUI\lib;$(ProjectDir)Lib\NativeFileDialog\lib;$(ProjectDir)Lib\SFML-2.5.1\lib;$(ProjectDir)Lib\Box2D\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>$(ProjectDir)LibraryPath;$(ProjectDir)LibraryPath\LuaPlus;$(ProjectDir)LibraryPath\SFML-2.5.1\include;$(ProjectDir)LibraryPath\LuaPlus\src;$(ProjectDir)LibraryPath\NativeFileDialog\include;$(ProjectDir)LibraryPath\IMGUI;$(ProjectDir)LibraryPath\Nlohmann;$(ProjectDir)LibraryPath\Box2D;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)Lib\LuaPlus;$(ProjectDir)Lib\SFML-2.5.1\lib;$(ProjectDir)Lib\NativeFileDialog\lib;$(ProjectDir)Lib\IMGUI\lib;$(ProjectDir)Lib\Box2D\lib;$(LibraryPath)</LibraryPath>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(ProjectDir)LibraryPath\LuaPlus;$(ProjectDir)LibraryPath\SFML-2.5.1\include;$(ProjectDir)LibraryPath\LuaPlus\src;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)Lib\LuaPlus;$(ProjectDir)Lib\SFML-2.5.1\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(ProjectDir)LibraryPath\LuaPlus;$(ProjectDir)LibraryPath\SFML-2.5.1\include;$(ProjectDir)LibraryPath\LuaPlus\src;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)Lib\LuaPlus;$(ProjectDir)Lib\SFML-2.5.1\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>
+      </SDLCheck>
+      <ConformanceMode>false</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)LibraryPath\Box2D\include;$(ProjectDir)LibraryPath\LuaPlus;$(ProjectDir)LibraryPath\LuaPlus\src;$(ProjectDir)LibraryPath\NativeFileDialog\include;$(SolutionDir)LibraryPath\IMGUI;$(SolutionDir)LibraryPath\Nlohmann;$(ProjectDir)LibraryPath\SFML-2.5.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>
+      </LanguageStandard>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;SFML_STATIC ;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader />
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>Box2D.lib;LuaPlus.lib;opengl32.lib;glfw3.lib;nfd_d.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>
+      </OptimizeReferences>
+      <EnableCOMDATFolding>
+      </EnableCOMDATFolding>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)LibraryPath\LuaPlus;$(ProjectDir)LibraryPath\SFML-2.5.1\include;$(ProjectDir)LibraryPath\LuaPlus\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <FunctionLevelLinking>
+      </FunctionLevelLinking>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>false</ConformanceMode>
+      <AdditionalIncludeDirectories>
+      </AdditionalIncludeDirectories>
+      <LanguageStandard>
+      </LanguageStandard>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>LuaPlus.lib;Box2D.lib;opengl32.lib;glfw3.lib;nfd_d.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)LibraryPath\LuaPlus;$(ProjectDir)LibraryPath\SFML-2.5.1\include;$(ProjectDir)LibraryPath\LuaPlus\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

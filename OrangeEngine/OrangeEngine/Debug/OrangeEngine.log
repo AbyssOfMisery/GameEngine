@@ -1,0 +1,4 @@
+﻿  Main.cpp
+Window.obj : error LNK2001: unresolved external symbol "public: static class sf::RenderStates const sf::RenderStates::Default" (?Default@RenderStates@sf@@2V12@B)
+Window.obj : error LNK2001: unresolved external symbol "public: static class sf::Color const sf::Color::Black" (?Black@Color@sf@@2V12@B)
+C:\Users\Family\Desktop\OrangeEngine\Debug\OrangeEngine.exe : fatal error LNK1120: 2 unresolved externals
