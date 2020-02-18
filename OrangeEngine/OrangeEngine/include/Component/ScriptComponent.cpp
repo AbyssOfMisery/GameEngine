@@ -21,6 +21,7 @@ void ScriptComponent::loadScriptFile(std::string _path)
 
 void ScriptComponent::Update(float timeDelta)
 {
+	if (!IsActive()) return;
 	LuaObject table = pLuaState->GetGlobals().GetByName("ComponentManager");
 	for (LuaTableIterator it(table); it; it.Next())
 	{

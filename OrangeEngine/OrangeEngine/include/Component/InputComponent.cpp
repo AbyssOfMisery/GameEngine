@@ -13,6 +13,7 @@ InputComponent::InputComponent(ComponentManager& obj): BaseComponent(obj) {
 	m_keyUpCommand = std::make_shared<WalkUpCommand>();
 	m_keyDownCommand = std::make_shared<WalkDownCommand>();
 	m_keyAttackCommand = std::make_shared<AttackCommand>();
+	m_doNothingCommand = std::make_shared<DoNothingCommand>();
 }
 
 void InputComponent::BindKey(KEY key, sf::Keyboard::Key keyToBind) {
@@ -20,12 +21,14 @@ void InputComponent::BindKey(KEY key, sf::Keyboard::Key keyToBind) {
 }
 
 void InputComponent::Update(float timeDelta) {
+	if (!IsActive()) return;
 	try {
 		if (sf::Keyboard::isKeyPressed(m_keyMappings[KEY::KEY_LEFT])) m_keyLeftCommand->Execute(m_gameObject);
 		else if (sf::Keyboard::isKeyPressed(m_keyMappings[KEY::KEY_RIGHT])) m_keyRightCommand->Execute(m_gameObject);
 		else if (sf::Keyboard::isKeyPressed(m_keyMappings[KEY::KEY_UP])) m_keyUpCommand->Execute(m_gameObject);
 		else if (sf::Keyboard::isKeyPressed(m_keyMappings[KEY::KEY_DOWN])) m_keyDownCommand->Execute(m_gameObject);
 		else if (sf::Keyboard::isKeyPressed(m_keyMappings[KEY::KEY_ATTACK])) m_keyAttackCommand->Execute(m_gameObject);
+		else m_doNothingCommand->Execute(m_gameObject);
 	}
 	catch (const std::exception& e) {
 		std::cout << "Key Pressed but not bound" << std::endl;

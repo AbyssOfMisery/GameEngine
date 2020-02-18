@@ -42,6 +42,16 @@ public:
 	bool IsSolid(int columnIndex, int rowIndex);
 
 	/**
+	* Returns a to-pixel coordinate for spawning a game object
+	*/
+	sf::Vector2f GetRandomSpawnLocationForTile(TILE tile);
+
+	/**
+	* Returns the screen position of the tile
+	*/
+	sf::Vector2f GetTilePosition(int columnIndex, int rowIndex);
+
+	/**
 	* Sets the index of a given tile in the 2D game grid.
 	* This also changes the tile sprite, and is how tiles should be changed and set manually.
 	*/

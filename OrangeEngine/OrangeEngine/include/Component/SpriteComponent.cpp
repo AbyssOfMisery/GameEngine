@@ -6,6 +6,7 @@ SpriteComponent::SpriteComponent(ComponentManager & obj) : BaseComponent(obj), m
 }
 
 void SpriteComponent::Update(float timeDelta) {
+	if (!IsActive()) return;
 	if (m_gameObject.GetPhysicsComponent() != nullptr) m_sprite->setPosition(m_gameObject.GetPhysicsComponent()->GetPosition());
 }
 

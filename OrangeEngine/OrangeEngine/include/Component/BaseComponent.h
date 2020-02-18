@@ -8,8 +8,13 @@ public:
 	BaseComponent(ComponentManager &obj) : m_gameObject(obj) {};
 	virtual void Update(float timeDelta) = 0;
 
+	void SetActive(bool active) { m_active = active; }
+	bool IsActive() const { return m_active; }
+
 protected:
 	ComponentManager& m_gameObject;
+
+	bool m_active;
 };
 
 #endif // !BASE_COMPONENT_H

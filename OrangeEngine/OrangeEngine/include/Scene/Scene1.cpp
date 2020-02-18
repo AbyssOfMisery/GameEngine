@@ -73,6 +73,26 @@ bool Scene1::IsSolid(int i, int j) {
 	else return false;
 }
 
+sf::Vector2f Scene1::GetRandomSpawnLocationForTile(TILE tile)
+{
+	int columnIndex(0), rowIndex(0);
+
+	while (GetTileType(columnIndex, rowIndex) != tile) {
+		columnIndex = std::rand() % GRID_WIDTH;
+		rowIndex = std::rand() % GRID_HEIGHT;
+	}
+
+	return GetTilePosition(columnIndex, rowIndex);
+}
+
+sf::Vector2f Scene1::GetTilePosition(int columnIndex, int rowIndex)
+{
+	sf::Vector2f position;
+	position.x = m_origin.x + (columnIndex * TILE_SIZE) + (TILE_SIZE / 2);
+	position.y = m_origin.y + (rowIndex * TILE_SIZE) + (TILE_SIZE / 2);
+	return position;
+}
+
 TILE Scene1::GetTileType(int columnIndex, int rowIndex) const {
 	if ((columnIndex >= GRID_WIDTH) || (rowIndex >= GRID_HEIGHT)) return TILE::EMPTY;
 	return m_grid[columnIndex][rowIndex].type;
@@ -155,8 +175,7 @@ sf::Vector2f Scene1::GenerateEntryExit() {
 	SetTile(startI, GRID_HEIGHT - 1, TILE::WALL_ENTRANCE);
 	SetTile(endI, 0, TILE::WALL_DOOR_LOCKED);
 	m_doorTileIndices = { endI, 0 };
-	m_grid[m_doorTileIndices.x][m_doorTileIndices.y].physicsBody->SetUserData((void *)(&DOOR_LOCKED));
-	return{ (((float)startI + 0.5f) * TILE_SIZE) + m_origin.x, ((GRID_HEIGHT - 1.5f) * TILE_SIZE) + (float)m_origin.y };
+	return GetTilePosition(startI, GRID_HEIGHT - 2);
 }
 
 // Calculates the correct texture for each tile in the level.
@@ -177,7 +196,7 @@ void Scene1::CalculateTextures(b2World& world) {
 
 				auto posX = m_grid[i][j].sprite.getPosition().x + m_grid[i][j].sprite.getTexture()->getSize().x / 2.0f;
 				auto posY = m_grid[i][j].sprite.getPosition().y + m_grid[i][j].sprite.getTexture()->getSize().y / 2.0f;
-				m_grid[i][j].physicsBody = CreatePhysicsBody(world, { posX, posY }, { 0.77f, 0.77f });
+				m_grid[i][j].physicsBody = CreateSquarePhysicsBody(world, { posX, posY }, { 0.77f, 0.77f });
 			}
 		}
 	}
@@ -257,7 +276,9 @@ bool Scene1::IsWall(int i, int j) {
 }
 
 void Scene1::UnlockDoor() {
-	m_grid[m_doorTileIndices.x][m_doorTileIndices.y].physicsBody->SetUserData((void *)(&DOOR_UNLOCKED));
+	b2Filter filter = m_grid[m_doorTileIndices.x][m_doorTileIndices.y].physicsBody->GetFixtureList()->GetFilterData();
+	filter.categoryBits = UNLOCKED_DOOR;
+	m_grid[m_doorTileIndices.x][m_doorTileIndices.y].physicsBody->GetFixtureList()->SetFilterData(filter);
 	SetTile(m_doorTileIndices.x, m_doorTileIndices.y, TILE::WALL_DOOR_UNLOCKED);
 }
 

@@ -58,6 +58,12 @@
     <Filter Include="Source Files\Scene">
       <UniqueIdentifier>{6ab30172-d40e-4141-94ff-b09674214595}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Collision">
+      <UniqueIdentifier>{8f51be60-b755-4a36-a0db-09f3e6773937}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Collision">
+      <UniqueIdentifier>{727dc390-65e1-4b1f-ac40-2207f822e8e0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Game\OrangeEngine.h">
@@ -75,16 +81,10 @@
     <ClInclude Include="include\Manager\TextureManager.h">
       <Filter>Header Files\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="include\Actor\Player.h">
-      <Filter>Header Files\Actor</Filter>
-    </ClInclude>
     <ClInclude Include="include\Manager\ComponentManager.h">
       <Filter>Header Files\Manager</Filter>
     </ClInclude>
     <ClInclude Include="include\Component\Command.h">
-      <Filter>Header Files\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Component\GraphicsComponent.h">
       <Filter>Header Files\Component</Filter>
     </ClInclude>
     <ClInclude Include="include\Component\InputComponent.h">
@@ -126,6 +126,9 @@
     <ClInclude Include="include\Component\AnimatorComponent.h">
       <Filter>Header Files\Component</Filter>
     </ClInclude>
+    <ClInclude Include="include\Collision\PhysicsCollisionListener.h">
+      <Filter>Header Files\Collision</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="include\Game\OrangeEngine.cpp">
@@ -158,16 +161,7 @@
     <ClCompile Include="include\Manager\TextureManager.cpp">
       <Filter>Source Files\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="include\Actor\Player.cpp">
-      <Filter>Source Files\Actor</Filter>
-    </ClCompile>
-    <ClCompile Include="include\Manager\ComponentManager.cpp">
-      <Filter>Source Files\Manager</Filter>
-    </ClCompile>
     <ClCompile Include="include\Component\Command.cpp">
-      <Filter>Source Files\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="include\Component\GraphicsComponent.cpp">
       <Filter>Source Files\Component</Filter>
     </ClCompile>
     <ClCompile Include="include\Component\InputComponent.cpp">
@@ -199,6 +193,12 @@
     </ClCompile>
     <ClCompile Include="include\Component\AnimatorComponent.cpp">
       <Filter>Source Files\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Collision\PhysicsCollisionListener.cpp">
+      <Filter>Source Files\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Manager\ComponentManager.cpp">
+      <Filter>Source Files\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

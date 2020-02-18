@@ -40,6 +40,12 @@ public:
 class WalkDownCommand : public Command {
 public:
 	void Execute(ComponentManager& obj);
+
+
+};
+class DoNothingCommand : public Command {
+public:
+	void Execute(ComponentManager& obj);
 };
 
 #endif // !Command_h

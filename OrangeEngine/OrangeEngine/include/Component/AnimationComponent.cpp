@@ -10,6 +10,7 @@ AnimationComponent::AnimationComponent(ComponentManager & obj, sf::Texture & tex
 {}
 
 void AnimationComponent::Update(float timeDelta) {
+	if (!IsActive()) return;
 	m_progress += timeDelta;
 
 	if (m_progress >= (1.0f / m_animationSpeed)) {
