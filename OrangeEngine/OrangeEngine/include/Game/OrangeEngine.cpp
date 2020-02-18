@@ -22,6 +22,7 @@ OrangeEngine::OrangeEngine(std::shared_ptr<Window> windowprt) :
 
 	// Setup Player
 	SetupGameObject("resource/players/mage/spr_mage_", "", PLAYER, true, ANIMATION_FRAMES, true);
+	
 
 	// Setup Key
 	SetupGameObject("resource/loot/key/spr_pickup_key.png", "resource/sounds/snd_key_pickup.wav", DOOR_KEY, false);
@@ -34,6 +35,7 @@ OrangeEngine::OrangeEngine(std::shared_ptr<Window> windowprt) :
 	for (int i = 0; i < 5; ++i) {
 		auto index = SetupGameObject("resource/spr_torch.png", "resource/sounds/snd_fire.wav", 0, false, 5);
 		m_gameObjects[index]->GetSoundComponent()->SetSoundLooping(true);
+		m_gameObjects[index]->GetScriptComponent()->loadScriptFile("1.lua");
 		m_gameObjects[index]->SetName(std::string(TORCH));
 	}
 
@@ -75,6 +77,8 @@ int OrangeEngine::SetupGameObject(std::string texture, std::string sound, uint16
 	object->SetSpriteComponent(std::make_shared<SpriteComponent>(*object));
 	object->SetAnimatorComponent(std::make_shared<AnimatorComponent>(*object));
 	object->SetPhysicsComponent(std::make_shared<PhysicsComponent>(*object, body));
+	object->SetScriptComponent(std::make_shared<ScriptComponent>(*object));
+
 	if (!sound.empty()) object->SetSoundComponent(std::make_shared<SoundComponent>(*object, AssetManager::AddSoundBuffer(sound)));
 	if (isEntity) {
 		object->SetHealthComponent(std::make_shared<HealthComponent>(*object));
@@ -95,6 +99,7 @@ int OrangeEngine::SetupGameObject(std::string texture, std::string sound, uint16
 	m_physicComponents.push_back(object->GetPhysicsComponent());
 	m_animatorComponents.push_back(object->GetAnimatorComponent());
 	m_spriteComponents.push_back(object->GetSpriteComponent());
+	m_scriptComponents.push_back(object->GetScriptComponent());
 	if (!sound.empty()) m_soundComponents.push_back(object->GetSoundComponent());
 	if (isEntity) {
 		m_healthComponents.push_back(object->GetHealthComponent());
@@ -125,6 +130,7 @@ void OrangeEngine::Update() {
 	for (auto animator : m_animatorComponents) animator->Update(deltaTime.asSeconds());
 	for (auto sprite : m_spriteComponents) sprite->Update(deltaTime.asSeconds());
 	for (auto sound : m_soundComponents) sound->Update(deltaTime.asSeconds());
+	for (auto scripts : m_scriptComponents) scripts->Update(deltaTime.asSeconds());
 
 	auto playerPosition = m_gameObjects[0]->GetPhysicsComponent()->GetPosition();
 	m_window->MoveView(playerPosition);

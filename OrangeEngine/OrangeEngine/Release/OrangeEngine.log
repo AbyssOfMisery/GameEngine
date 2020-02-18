@@ -1,19 +1,2 @@
-﻿  AnimationComponent.cpp
-c:\users\family\documents\gameengine\orangeengine\orangeengine\include\component\animationcomponent.cpp(7): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-  AnimatorComponent.cpp
-  Command.cpp
-  InputComponent.cpp
-c:\users\family\documents\gameengine\orangeengine\orangeengine\include\component\inputcomponent.cpp(33): warning C4101: 'e': unreferenced local variable
-  PhysicsComponent.cpp
-  ScriptComponent.cpp
-  SoundComponent.cpp
-  SpriteComponent.cpp
-  Main.cpp
-  OrangeEngine.cpp
-c:\users\family\documents\gameengine\orangeengine\orangeengine\include\game\orangeengine.cpp(12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-c:\users\family\documents\gameengine\orangeengine\orangeengine\include\game\orangeengine.cpp(50): warning C4244: 'argument': conversion from 'const float' to 'unsigned int', possible loss of data
-c:\users\family\documents\gameengine\orangeengine\orangeengine\include\game\orangeengine.cpp(58): warning C4018: '<': signed/unsigned mismatch
-  ComponentManager.cpp
-  Generating Code...
-c:\users\family\documents\gameengine\orangeengine\orangeengine\include\component\animatorcomponent.cpp(38): warning C4715: 'AnimatorComponent::GetAnimation': not all control paths return a value
-  OrangeEngine.vcxproj -> C:\Users\Family\Documents\GameEngine\OrangeEngine\Release\OrangeEngine.exe
+﻿  ScriptComponent.cpp
+  OrangeEngine.vcxproj -> C:\Users\Tech\Documents\GitHub\GameEngine\OrangeEngine\Release\OrangeEngine.exe

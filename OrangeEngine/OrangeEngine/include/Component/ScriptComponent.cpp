@@ -2,9 +2,10 @@
 
 
 
-ScriptComponent::ScriptComponent(ComponentManager& obj) : BaseComponent(obj)
+ScriptComponent::ScriptComponent(ComponentManager& obj) : 
+	BaseComponent(obj)
 {
-
+	
 }
 
 
@@ -13,16 +14,16 @@ ScriptComponent::~ScriptComponent()
 
 }
 
-void ScriptComponent::loadScriptFile(std::string _path)
+void ScriptComponent::loadScriptFile(char* _path)
 {
-	pLuaState->DoFile(_path.c_str());
 
+	int iret = pLuaState->DoFile(_path);
 }
 
 void ScriptComponent::Update(float timeDelta)
 {
 	if (!IsActive()) return;
-	LuaObject table = pLuaState->GetGlobals().GetByName("ComponentManager");
+	LuaObject table = pLuaState->GetGlobals().GetByName("ScriptComponent");
 	for (LuaTableIterator it(table); it; it.Next())
 	{
 		LuaObject key = it.GetKey();

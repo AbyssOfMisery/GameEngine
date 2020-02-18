@@ -15,7 +15,7 @@ class ScriptComponent : public BaseComponent
 public:
 	ScriptComponent(ComponentManager& obj);
 	~ScriptComponent();
-	void loadScriptFile(std::string _path);
+	void loadScriptFile(char* _path);
 	void Update(float timeDelta);
 private:
 	std::vector<ComponentManager*>* obj;
