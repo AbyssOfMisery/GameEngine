@@ -20,6 +20,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Actor\Player.h" />
+    <ClInclude Include="include\Component\AnimationComponent.h" />
+    <ClInclude Include="include\Component\AnimatorComponent.h" />
     <ClInclude Include="include\Component\BaseComponent.h" />
     <ClInclude Include="include\Component\Command.h" />
     <ClInclude Include="include\Component\GraphicsComponent.h" />
@@ -42,6 +44,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="include\Actor\Player.cpp" />
+    <ClCompile Include="include\Component\AnimationComponent.cpp" />
+    <ClCompile Include="include\Component\AnimatorComponent.cpp" />
     <ClCompile Include="include\Component\Command.cpp" />
     <ClCompile Include="include\Component\GraphicsComponent.cpp" />
     <ClCompile Include="include\Component\InputComponent.cpp" />

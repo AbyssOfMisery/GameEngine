@@ -13,6 +13,8 @@ public:
 
 	void SetSprite(int textureID);
 	void SetSprite(sf::Texture& texture);
+	void SetSpriteTextureRect(sf::IntRect rect);
+	sf::IntRect GetSpriteTextureRect() const;
 	std::shared_ptr<sf::Sprite> GetSprite() const;
 
 private:

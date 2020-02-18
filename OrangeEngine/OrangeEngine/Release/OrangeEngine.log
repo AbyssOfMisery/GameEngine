@@ -1,4 +1,7 @@
 ﻿  Player.cpp
+  AnimationComponent.cpp
+c:\users\family\documents\gameengine\orangeengine\orangeengine\include\component\animationcomponent.cpp(7): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+  AnimatorComponent.cpp
   Command.cpp
   GraphicsComponent.cpp
 c:\users\family\documents\gameengine\orangeengine\orangeengine\include\component\graphicscomponent.cpp(89): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
@@ -13,6 +16,7 @@ c:\users\family\documents\gameengine\orangeengine\orangeengine\include\game\oran
 c:\users\family\documents\gameengine\orangeengine\orangeengine\include\game\orangeengine.cpp(25): warning C4244: 'argument': conversion from 'const float' to 'unsigned int', possible loss of data
   ComponentManager.cpp
   Generating Code...
+c:\users\family\documents\gameengine\orangeengine\orangeengine\include\component\animatorcomponent.cpp(28): warning C4715: 'AnimatorComponent::GetAnimation': not all control paths return a value
 LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/OPT:ICF' specification
 LuaPlus.lib(lapi.obj) : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:ICF' specification
 LuaPlus.lib(LuaState_DumpObject.obj) : warning LNK4099: PDB 'LuaPlus.pdb' was not found with 'LuaPlus.lib(LuaState_DumpObject.obj)' or at 'C:\Users\Family\Documents\GameEngine\OrangeEngine\Release\LuaPlus.pdb'; linking object as if no debug info
