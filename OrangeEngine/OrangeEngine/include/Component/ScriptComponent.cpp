@@ -2,7 +2,7 @@
 
 
 
-ScriptComponent::ScriptComponent()
+ScriptComponent::ScriptComponent(ComponentManager& obj) : BaseComponent(obj)
 {
 
 }
@@ -19,7 +19,7 @@ void ScriptComponent::loadScriptFile(std::string _path)
 
 }
 
-void ScriptComponent::Update(ComponentManager & obj)
+void ScriptComponent::Update(float timeDelta)
 {
 	LuaObject table = pLuaState->GetGlobals().GetByName("ComponentManager");
 	for (LuaTableIterator it(table); it; it.Next())

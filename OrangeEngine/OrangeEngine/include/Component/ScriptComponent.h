@@ -3,19 +3,20 @@
 
 #include "../Manager/ComponentManager.h"
 #include "../Utility/Util.h"
+#include "BaseComponent.h"
 #include <luaPlus.h>
 
 class ComponentManager;
 
 using namespace LuaPlus;
 
-class ScriptComponent 
+class ScriptComponent : public BaseComponent
 {
 public:
-	ScriptComponent();
+	ScriptComponent(ComponentManager& obj);
 	~ScriptComponent();
 	void loadScriptFile(std::string _path);
-	void Update(ComponentManager& obj);
+	void Update(float timeDelta);
 private:
 	std::vector<ComponentManager*>* obj;
 	LuaState* pLuaState;

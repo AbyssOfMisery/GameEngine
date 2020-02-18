@@ -20,12 +20,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Actor\Player.h" />
+    <ClInclude Include="include\Component\BaseComponent.h" />
     <ClInclude Include="include\Component\Command.h" />
     <ClInclude Include="include\Component\GraphicsComponent.h" />
     <ClInclude Include="include\Component\HealthComponent.h" />
     <ClInclude Include="include\Component\InputComponent.h" />
     <ClInclude Include="include\Component\PhysicsComponent.h" />
     <ClInclude Include="include\Component\ScriptComponent.h" />
+    <ClInclude Include="include\Component\SpriteComponent.h" />
     <ClInclude Include="include\Debug\SFMLDebugDraw.h" />
     <ClInclude Include="include\Game\OrangeEngine.h" />
     <ClInclude Include="include\Manager\ComponentManager.h" />

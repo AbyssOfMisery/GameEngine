@@ -125,8 +125,6 @@ private:
 
 	/**
 	* Draws the level grid to the provided render window.
-	* @param window The render window to draw the level to.
-	* @param timeDelta The time that has elapsed since the last update.
 	*/
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 

@@ -6,20 +6,20 @@
 #include "../Utility/Enums.h"
 #include "../Manager/ComponentManager.h"
 #include "../Component/Command.h"
-
+#include "BaseComponent.h"
 
 class ComponentManager;
 class Command;
 
-class InputComponent {
+class InputComponent : public BaseComponent{
 
 public:
 
-	InputComponent();
+	InputComponent(ComponentManager& obj);
 	~InputComponent() {};
 
 	void BindKey(KEY key, sf::Keyboard::Key keyToBind);
-	void Update(ComponentManager& obj);
+	void Update(float timeDelta);
 
 protected:
 	// Default key bindings

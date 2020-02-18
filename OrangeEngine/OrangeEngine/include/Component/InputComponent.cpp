@@ -1,6 +1,6 @@
 #include "InputComponent.h"
 
-InputComponent::InputComponent() {
+InputComponent::InputComponent(ComponentManager& obj): BaseComponent(obj) {
 	// Default key binding
 	BindKey(KEY::KEY_LEFT, sf::Keyboard::A);
 	BindKey(KEY::KEY_RIGHT, sf::Keyboard::D);
@@ -19,13 +19,13 @@ void InputComponent::BindKey(KEY key, sf::Keyboard::Key keyToBind) {
 	m_keyMappings[key] = keyToBind;
 }
 
-void InputComponent::Update(ComponentManager& obj) {
+void InputComponent::Update(float timeDelta) {
 	try {
-		if (sf::Keyboard::isKeyPressed(m_keyMappings[KEY::KEY_LEFT])) m_keyLeftCommand->Execute(obj);
-		else if (sf::Keyboard::isKeyPressed(m_keyMappings[KEY::KEY_RIGHT])) m_keyRightCommand->Execute(obj);
-		else if (sf::Keyboard::isKeyPressed(m_keyMappings[KEY::KEY_UP])) m_keyUpCommand->Execute(obj);
-		else if (sf::Keyboard::isKeyPressed(m_keyMappings[KEY::KEY_DOWN])) m_keyDownCommand->Execute(obj);
-		else if (sf::Keyboard::isKeyPressed(m_keyMappings[KEY::KEY_ATTACK])) m_keyAttackCommand->Execute(obj);
+		if (sf::Keyboard::isKeyPressed(m_keyMappings[KEY::KEY_LEFT])) m_keyLeftCommand->Execute(m_gameObject);
+		else if (sf::Keyboard::isKeyPressed(m_keyMappings[KEY::KEY_RIGHT])) m_keyRightCommand->Execute(m_gameObject);
+		else if (sf::Keyboard::isKeyPressed(m_keyMappings[KEY::KEY_UP])) m_keyUpCommand->Execute(m_gameObject);
+		else if (sf::Keyboard::isKeyPressed(m_keyMappings[KEY::KEY_DOWN])) m_keyDownCommand->Execute(m_gameObject);
+		else if (sf::Keyboard::isKeyPressed(m_keyMappings[KEY::KEY_ATTACK])) m_keyAttackCommand->Execute(m_gameObject);
 	}
 	catch (const std::exception& e) {
 		std::cout << "Key Pressed but not bound" << std::endl;
