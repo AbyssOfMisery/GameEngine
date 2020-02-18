@@ -6,10 +6,11 @@ c:\users\family\documents\gameengine\orangeengine\orangeengine\include\component
 c:\users\family\documents\gameengine\orangeengine\orangeengine\include\component\inputcomponent.cpp(30): warning C4101: 'e': unreferenced local variable
   PhysicsComponent.cpp
   ScriptComponent.cpp
+  SpriteComponent.cpp
   Main.cpp
   OrangeEngine.cpp
 c:\users\family\documents\gameengine\orangeengine\orangeengine\include\game\orangeengine.cpp(12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-c:\users\family\documents\gameengine\orangeengine\orangeengine\include\game\orangeengine.cpp(26): warning C4244: 'argument': conversion from 'const float' to 'unsigned int', possible loss of data
+c:\users\family\documents\gameengine\orangeengine\orangeengine\include\game\orangeengine.cpp(25): warning C4244: 'argument': conversion from 'const float' to 'unsigned int', possible loss of data
   ComponentManager.cpp
   Generating Code...
 LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/OPT:ICF' specification

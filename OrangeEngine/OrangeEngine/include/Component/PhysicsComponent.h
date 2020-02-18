@@ -21,7 +21,6 @@ public:
 	sf::Vector2f GetPosition() const;
 
 	void SetCollisionCallback(char* collisionWith, std::function<void()> callback);
-	void ResetPosition(sf::Vector2f position);
 
 private:
 	void BeginContact(b2Contact* contact);

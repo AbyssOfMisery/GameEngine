@@ -8,7 +8,7 @@
 #include "../Component/Command.h"
 #include "BaseComponent.h"
 
-class ComponentManager;
+class BaseComponent;
 class Command;
 
 class InputComponent : public BaseComponent{

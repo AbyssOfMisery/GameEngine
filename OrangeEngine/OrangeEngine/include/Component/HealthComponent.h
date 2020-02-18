@@ -1,7 +1,10 @@
 #ifndef HealthComponent_h
 #define HealthComponent_h
 
+#include "../Manager/ComponentManager.h"
 #include "BaseComponent.h"
+
+class BaseComponent;
 
 class HealthComponent : public BaseComponent {
 public:

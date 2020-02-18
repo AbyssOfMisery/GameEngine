@@ -47,6 +47,7 @@
     <ClCompile Include="include\Component\InputComponent.cpp" />
     <ClCompile Include="include\Component\PhysicsComponent.cpp" />
     <ClCompile Include="include\Component\ScriptComponent.cpp" />
+    <ClCompile Include="include\Component\SpriteComponent.cpp" />
     <ClCompile Include="include\Debug\SFMLDebugDraw.cpp" />
     <ClCompile Include="include\Game\Main.cpp" />
     <ClCompile Include="include\Game\OrangeEngine.cpp" />
