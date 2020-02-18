@@ -13,25 +13,28 @@ public:
 	OrangeEngine(std::shared_ptr<Window> windowprt);
 	~OrangeEngine();
 
-	void Update();
-	void Render();
+
+	virtual void Update();
+	virtual void Render();
 	virtual void RestartClock();
 
 	sf::Time GetElapsed();
 
 private:
 
-	void SetupEntity(std::string textureFilenamePrefix, uint16 physicsCategory, sf::Vector2f position, bool isPlayer = false);
-	void SetupItem(std::string textureFilename, sf::Vector2f position, uint16 physicsCategory);
+	void SetupNewLevel();
+	int SetupGameObject(std::string texture, std::string sound, uint16 physicsCategory, bool isEntity, int frames = ANIMATION_FRAMES, bool isPlayer = false);
 
-	std::function<void()> m_newLevelCallback;
-	std::function<void()> m_unlockDoorCallbak;
-	bool m_generateNewLevel = false;
+	// Callbacks to collisions
+	std::function<void(void* ptr)> m_newLevelCallback;
+	std::function<void(void* ptr)> m_unlockDoorCallback;
+	std::function<void(void* ptr)> m_collectScoreCallback;
 
 	Scene1 m_Scene;
 	b2World m_world;
 	PhysicsCollisionListener m_collisionListener;
 	SFMLDebugDraw m_debugDraw;
+
 
 	std::vector<std::shared_ptr<ComponentManager>> m_gameObjects;
 
@@ -39,12 +42,16 @@ private:
 	std::vector<std::shared_ptr<PhysicsComponent>> m_physicComponents;
 	std::vector<std::shared_ptr<AnimatorComponent>> m_animatorComponents;
 	std::vector<std::shared_ptr<SpriteComponent>> m_spriteComponents;
-	std::vector<std::shared_ptr<ScriptComponent>> m_scriptComponents;
 	std::vector<std::shared_ptr<HealthComponent>> m_healthComponents;
+	std::vector<std::shared_ptr<SoundComponent>> m_soundComponents;
+	std::vector<std::shared_ptr<ScriptComponent>> m_scriptComponents;
 
 	sf::Clock m_clock;
 	sf::Time m_previousTime;
 	sf::Font m_font;
+
+	int m_scoreTotal;
+	bool m_generateNewLevel;
 };
 
-#endif // !GAME_HPP
+#endif // !ORANGE_ENGINE_H

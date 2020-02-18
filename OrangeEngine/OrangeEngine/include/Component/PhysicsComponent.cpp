@@ -1,18 +1,19 @@
 #include "PhysicsComponent.h"
 
-PhysicsComponent::PhysicsComponent(ComponentManager& obj, b2Body* body)
-	: BaseComponent(obj), m_body(body)
+PhysicsComponent::PhysicsComponent(ComponentManager& obj, b2Body* body) :
+	BaseComponent(obj), 
+	m_body(body)
 {}
 
 void PhysicsComponent::Update(float timeDelta) {
+	m_body->SetActive(IsActive());
 	if (!IsActive()) return;
 	m_body->SetLinearVelocity({ m_velocity.x * timeDelta, m_velocity.y * timeDelta });
-	m_position = { m_body->GetPosition().x * PIXEL_PER_METER, m_body->GetPosition().y * PIXEL_PER_METER };
+	m_position = { m_body->GetPosition().x * PIXEL_PER_METER , m_body->GetPosition().y * PIXEL_PER_METER };
 }
 
 void PhysicsComponent::SetVelocity(sf::Vector2f velocity) {
 	m_velocity = velocity;
-	m_body->SetLinearVelocity({ velocity.x, velocity.y });
 }
 
 sf::Vector2f PhysicsComponent::GetVelocity() const {

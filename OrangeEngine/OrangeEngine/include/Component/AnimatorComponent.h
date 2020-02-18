@@ -6,7 +6,7 @@
 #include "../Component/AnimationComponent.h"
 #include "../Component/BaseComponent.h"
 
-class Component;
+class BaseComponent;
 class AnimationComponent;
 
 class AnimatorComponent : public BaseComponent {

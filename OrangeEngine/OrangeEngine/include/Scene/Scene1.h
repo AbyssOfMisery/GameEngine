@@ -1,6 +1,7 @@
 #ifndef SCENE1_H
 #define SCENE1_H
 
+#include <set>
 #include "../Utility/Util.h"
 #include "../Utility/Enums.h"
 
@@ -44,7 +45,7 @@ public:
 	/**
 	* Returns a to-pixel coordinate for spawning a game object
 	*/
-	sf::Vector2f GetRandomSpawnLocationForTile(TILE tile);
+	sf::Vector2f GetRandomSpawnLocation(bool floor = true);
 
 	/**
 	* Returns the screen position of the tile
@@ -165,5 +166,10 @@ private:
 	* The indices of the tile containing the levels door.
 	*/
 	sf::Vector2i m_doorTileIndices;
+
+	/**
+	* Set of tiles where the spawn position is already taken
+	*/
+	std::set<std::pair<int, int>> m_spawnPositions;
 };
 #endif

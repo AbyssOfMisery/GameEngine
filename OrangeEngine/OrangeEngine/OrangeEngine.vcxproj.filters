@@ -78,9 +78,6 @@
     <ClInclude Include="include\Debug\SFMLDebugDraw.h">
       <Filter>Header Files\Debug</Filter>
     </ClInclude>
-    <ClInclude Include="include\Manager\TextureManager.h">
-      <Filter>Header Files\Manager</Filter>
-    </ClInclude>
     <ClInclude Include="include\Manager\ComponentManager.h">
       <Filter>Header Files\Manager</Filter>
     </ClInclude>
@@ -129,6 +126,15 @@
     <ClInclude Include="include\Collision\PhysicsCollisionListener.h">
       <Filter>Header Files\Collision</Filter>
     </ClInclude>
+    <ClInclude Include="include\Game\Menu.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Component\SoundComponent.h">
+      <Filter>Header Files\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Manager\AssetManager.h">
+      <Filter>Header Files\Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="include\Game\OrangeEngine.cpp">
@@ -157,9 +163,6 @@
     </ClCompile>
     <ClCompile Include="include\Debug\SFMLDebugDraw.cpp">
       <Filter>Source Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="include\Manager\TextureManager.cpp">
-      <Filter>Source Files\Manager</Filter>
     </ClCompile>
     <ClCompile Include="include\Component\Command.cpp">
       <Filter>Source Files\Component</Filter>
@@ -198,6 +201,15 @@
       <Filter>Source Files\Collision</Filter>
     </ClCompile>
     <ClCompile Include="include\Manager\ComponentManager.cpp">
+      <Filter>Source Files\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Game\Menu.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Component\SoundComponent.cpp">
+      <Filter>Source Files\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Manager\AssetManager.cpp">
       <Filter>Source Files\Manager</Filter>
     </ClCompile>
   </ItemGroup>

@@ -6,6 +6,7 @@
 #include "BaseComponent.h"
 #include "../Utility/Util.h"
 
+class BaseComponent;
 class ComponentManager;
 
 class PhysicsComponent : public BaseComponent {

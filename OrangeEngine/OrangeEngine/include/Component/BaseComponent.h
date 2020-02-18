@@ -5,7 +5,7 @@ class ComponentManager;
 
 class BaseComponent {
 public:
-	BaseComponent(ComponentManager &obj) : m_gameObject(obj) {};
+	BaseComponent(ComponentManager &obj) : m_gameObject(obj), m_active(true) {};
 	virtual void Update(float timeDelta) = 0;
 
 	void SetActive(bool active) { m_active = active; }
@@ -13,7 +13,6 @@ public:
 
 protected:
 	ComponentManager& m_gameObject;
-
 	bool m_active;
 };
 

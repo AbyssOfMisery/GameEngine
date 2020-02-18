@@ -1,5 +1,5 @@
 #include "../Component/AnimationComponent.h"
-#include "../Manager/TextureManager.h"
+#include "../Manager/AssetManager.h"
 
 AnimationComponent::AnimationComponent(ComponentManager & obj, sf::Texture & texture, int animationSpeed) :
 	BaseComponent(obj),

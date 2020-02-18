@@ -1,15 +1,17 @@
 #include "OrangeEngine.h"
 #include <functional>
-#include "../Manager/TextureManager.h"
+#include <SFML/Audio.hpp>
+#include "../Manager/AssetManager.h"
 
-OrangeEngine::OrangeEngine(std::shared_ptr<Window> windowprt) : 
-	SceneManager(windowprt), m_world(b2Vec2(0, 0)),
-
+OrangeEngine::OrangeEngine(std::shared_ptr<Window> windowprt) :
+	SceneManager(windowprt), m_world(b2Vec2(0, 0)), m_generateNewLevel(true),
 	m_debugDraw(*m_window->GetRenderWindow())
 {
 	m_clock.restart();
 	m_previousTime = m_clock.getElapsedTime();
 	srand(time(nullptr));
+
+	sf::Listener::setGlobalVolume(50.0f);
 
 	m_world.SetContactListener(&m_collisionListener);
 	m_world.SetDebugDraw(&m_debugDraw);
@@ -19,79 +21,89 @@ OrangeEngine::OrangeEngine(std::shared_ptr<Window> windowprt) :
 	m_Scene = Scene1(*m_window->GetRenderWindow());
 
 	// Setup Player
-	SetupEntity("resource/players/mage/spr_mage_", PLAYER, m_Scene.GenerateScene1(m_world), true);
+	SetupGameObject("resource/players/mage/spr_mage_", "", PLAYER, true, ANIMATION_FRAMES, true);
 
 	// Setup Key
-	SetupItem("resource/loot/key/spr_pickup_key.png", m_Scene.GetRandomSpawnLocationForTile(TILE::FLOOR),DOOR_KEY);
+	SetupGameObject("resource/loot/key/spr_pickup_key.png", "resource/sounds/snd_key_pickup.wav", DOOR_KEY, false);
 
-	m_newLevelCallback = [&]() { m_generateNewLevel = true; };
-	m_unlockDoorCallbak = [&]() { m_Scene.UnlockDoor(); m_gameObjects[1]->Deactivate();};
+	// Setup Score (Gems)
+	for (int i = 0; i < 15; ++i)
+		SetupGameObject("resource/loot/gem/spr_pickup_gem.png", "resource/sounds/snd_gem_pickup.wav", SCORE, false);
+
+	// Setup Torches
+	for (int i = 0; i < 5; ++i) {
+		auto index = SetupGameObject("resource/spr_torch.png", "resource/sounds/snd_fire.wav", 0, false, 5);
+		m_gameObjects[index]->GetSoundComponent()->SetSoundLooping(true);
+		m_gameObjects[index]->SetName(std::string(TORCH));
+	}
+
+	// Setup Collision callbacks
+	m_newLevelCallback = [&](void *ptr) { m_generateNewLevel = true; };
+	m_unlockDoorCallback = [&](void *ptr) { m_Scene.UnlockDoor(); m_gameObjects[(int)ptr]->GetSoundComponent()->PlaySound(); m_gameObjects[(int)ptr]->Deactivate(); };
+	m_collectScoreCallback = [&](void *ptr) { printf("score picked up\n"); m_gameObjects[(int)ptr]->GetSoundComponent()->PlaySound(); m_gameObjects[(int)ptr]->Deactivate(); };
+
 	m_collisionListener.SetCollisionCallback(PLAYER | UNLOCKED_DOOR, m_newLevelCallback);
-	m_collisionListener.SetCollisionCallback(PLAYER | DOOR_KEY, m_unlockDoorCallbak);
+	m_collisionListener.SetCollisionCallback(PLAYER | DOOR_KEY, m_unlockDoorCallback);
+	m_collisionListener.SetCollisionCallback(PLAYER | SCORE, m_collectScoreCallback);
 
+	// Limit Framerate
 	m_window->GetRenderWindow()->setFramerateLimit(FPS);
-
 }
 
 OrangeEngine::~OrangeEngine() {}
 
-void OrangeEngine::SetupEntity(std::string textureFilenamePrefix, uint16 physicsCategory, sf::Vector2f position, bool isPlayer)
-{
-	// Creating physics body and setting collision category
-	std::shared_ptr<ComponentManager> entity = std::make_shared<ComponentManager>();
-	b2Body* body = CreateCirclePhysicsBody(m_world, { 0, 0 }, 0.5f, b2_dynamicBody);
+void OrangeEngine::SetupNewLevel() {
+	m_generateNewLevel = false;
+	m_gameObjects[0]->GetPhysicsComponent()->SetPosition(m_Scene.GenerateScene1(m_world));
+	for (auto i = 1; i < m_gameObjects.size(); ++i) {
+		m_gameObjects[i]->Activate();
+		bool torch = m_gameObjects[i]->GetName() == std::string(TORCH);
+		m_gameObjects[i]->GetPhysicsComponent()->SetPosition(m_Scene.GetRandomSpawnLocation(torch));
+	}
+}
+
+int OrangeEngine::SetupGameObject(std::string texture, std::string sound, uint16 physicsCategory, bool isEntity, int frames, bool isPlayer) {
+	std::shared_ptr<ComponentManager> object = std::make_shared<ComponentManager>();
+	b2Body* body = isEntity ? CreateCirclePhysicsBody(m_world, { 0, 0 }, 0.5f, b2_dynamicBody) :
+		CreateSquarePhysicsBody(m_world, { 0, 0 }, { 0.45f, 0.45f }, b2_dynamicBody);
 	b2Filter filter = body->GetFixtureList()->GetFilterData();
 	filter.categoryBits = physicsCategory;
 	body->GetFixtureList()->SetFilterData(filter);
+	body->GetFixtureList()->SetSensor(!isEntity);
+	body->SetUserData((void *)m_gameObjects.size());
 
-	if (isPlayer) entity->SetInputComponent(std::make_shared<InputComponent>(*entity));
-	// TODO: else !isPlayer SetAIComponent
-	entity->SetPhysicsComponent(std::make_shared<PhysicsComponent>(*entity, body));
-	entity->SetAnimatorComponent(std::make_shared<AnimatorComponent>(*entity));
-	entity->SetSpriteComponent(std::make_shared<SpriteComponent>(*entity));
-	entity->SetHealthComponent(std::make_shared<HealthComponent>(*entity));
-
-	// Loading textures and creating animations
-	for (int i = 0; i < static_cast<int>(ANIMATION_STATE::COUNT); ++i) {
-		entity->GetAnimatorComponent()->AddAnimation(i, TextureManager::AddTexture(textureFilenamePrefix + ANIMATION_TEXTURES[i]));
-		auto size = entity->GetAnimatorComponent()->GetAnimation(i).GetTexture().getSize();
-		int frames = size.x / PIXEL_PER_METER;
-		for (int j = 0; j < frames; ++j)
-			entity->GetAnimatorComponent()->GetAnimation(i).AddFrame({ ((int)size.x / frames) * j, 0, (int)PIXEL_PER_METER, (int)PIXEL_PER_METER });
+	object->SetSpriteComponent(std::make_shared<SpriteComponent>(*object));
+	object->SetAnimatorComponent(std::make_shared<AnimatorComponent>(*object));
+	object->SetPhysicsComponent(std::make_shared<PhysicsComponent>(*object, body));
+	if (!sound.empty()) object->SetSoundComponent(std::make_shared<SoundComponent>(*object, AssetManager::AddSoundBuffer(sound)));
+	if (isEntity) {
+		object->SetHealthComponent(std::make_shared<HealthComponent>(*object));
+		if (isPlayer) object->SetInputComponent(std::make_shared<InputComponent>(*object));
+		// TODO: else !isPlayer SetAIComponent
 	}
 
-	m_gameObjects.push_back(entity);
-	m_physicComponents.push_back(entity->GetPhysicsComponent());
-	m_animatorComponents.push_back(entity->GetAnimatorComponent());
-	m_spriteComponents.push_back(entity->GetSpriteComponent());
-	m_healthComponents.push_back(entity->GetHealthComponent());
-	if (isPlayer) m_inputComponents.push_back(entity->GetInputComponent());
-	// TODO: else !isPlayer m_aiComponents push_back entity->GetAIComponent()
+	for (int i = 0; i < (isEntity ? static_cast<int>(ANIMATION_STATE::COUNT) : 1); ++i) {
+		std::string texturePath = isEntity ? texture + ANIMATION_TEXTURES[i] : texture;
+		object->GetAnimatorComponent()->AddAnimation(i, AssetManager::AddTexture(texturePath));
+		auto size = object->GetAnimatorComponent()->GetAnimation(i).GetTexture().getSize();
+		auto n = size.x > PIXEL_PER_METER ? frames : 1;
+		for (int j = 0; j < n; ++j)
+			object->GetAnimatorComponent()->GetAnimation(i).AddFrame({ ((int)size.x / n) * j, 0, (int)size.x / n, (int)size.y });
+	}
 
-	entity->GetPhysicsComponent()->SetPosition(position);
+	m_gameObjects.push_back(object);
+	m_physicComponents.push_back(object->GetPhysicsComponent());
+	m_animatorComponents.push_back(object->GetAnimatorComponent());
+	m_spriteComponents.push_back(object->GetSpriteComponent());
+	if (!sound.empty()) m_soundComponents.push_back(object->GetSoundComponent());
+	if (isEntity) {
+		m_healthComponents.push_back(object->GetHealthComponent());
+		if (isPlayer) m_inputComponents.push_back(object->GetInputComponent());
+		// TODO: else !isPlayer m_aiComponents push_back entity->GetAIComponent()
+	}
+
+	return m_gameObjects.size() - 1;
 }
-
-void OrangeEngine::SetupItem(std::string textureFilename, sf::Vector2f position, uint16 physicsCategory)
-{
-	std::shared_ptr<ComponentManager> entity = std::make_shared<ComponentManager>();
-	b2Body* body = CreateSquarePhysicsBody(m_world, { 0, 0 }, { 0.45f, 0.45f }, b2_staticBody);
-	b2Filter filter = body->GetFixtureList()->GetFilterData();
-	filter.categoryBits = physicsCategory;
-	body->GetFixtureList()->SetFilterData(filter);
-	body->GetFixtureList()->SetSensor(true);
-
-	entity->SetSpriteComponent(std::make_shared<SpriteComponent>(*entity));
-	entity->SetPhysicsComponent(std::make_shared<PhysicsComponent>(*entity, body));
-
-	entity->GetSpriteComponent()->SetSprite(TextureManager::AddTexture(textureFilename));
-	entity->GetSpriteComponent()->SetSpriteTextureRect({ 0,0, 33, 33 }); // TODO: account for item being animated!
-	entity->GetPhysicsComponent()->SetPosition(position);
-
-	m_gameObjects.push_back(entity);
-	m_physicComponents.push_back(entity->GetPhysicsComponent());
-	m_spriteComponents.push_back(entity->GetSpriteComponent());
-}
-
 
 sf::Time OrangeEngine::GetElapsed() {
 	return m_clock.getElapsedTime() - m_previousTime;
@@ -106,26 +118,23 @@ void OrangeEngine::Update() {
 	m_window->Update();
 	sf::Time deltaTime = m_clock.getElapsedTime() - GetElapsed();
 
-	for (auto i : m_inputComponents) i->Update(deltaTime.asSeconds());
-	for (auto p : m_physicComponents) p->Update(deltaTime.asSeconds());
-	for (auto a : m_animatorComponents) a->Update(deltaTime.asSeconds());
-	for (auto s : m_spriteComponents) s->Update(deltaTime.asSeconds());
+	if (m_generateNewLevel) SetupNewLevel();
 
-	m_window->MoveView(m_gameObjects[0]->GetPhysicsComponent()->GetPosition());
+	for (auto input : m_inputComponents) input->Update(deltaTime.asSeconds());
+	for (auto physic : m_physicComponents) physic->Update(deltaTime.asSeconds());
+	for (auto animator : m_animatorComponents) animator->Update(deltaTime.asSeconds());
+	for (auto sprite : m_spriteComponents) sprite->Update(deltaTime.asSeconds());
+	for (auto sound : m_soundComponents) sound->Update(deltaTime.asSeconds());
 
+	auto playerPosition = m_gameObjects[0]->GetPhysicsComponent()->GetPosition();
+	m_window->MoveView(playerPosition);
+	sf::Listener::setPosition(playerPosition.x, 0.0f, playerPosition.y);
 
 	m_world.Step(TIME_STEP, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
 
-	if (m_generateNewLevel) {
-		m_generateNewLevel = false;
-		m_gameObjects[1]->Activate();
-		sf::Vector2f PlayerPos = m_Scene.GenerateScene1(m_world);
-		m_gameObjects[0]->GetPhysicsComponent()->SetPosition({ PlayerPos.x, PlayerPos.y });
-		m_gameObjects[1]->GetPhysicsComponent()->SetPosition(m_Scene.GetRandomSpawnLocationForTile(TILE::FLOOR));
-	}
-
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::U)) m_Scene.UnlockDoor();
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::R)) m_generateNewLevel = true;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::M)) SetChangeScene(true);
 }
 
 void OrangeEngine::Render() {
@@ -133,10 +142,9 @@ void OrangeEngine::Render() {
 
 	m_window->Draw(m_Scene);
 
-	for (auto s : m_spriteComponents) m_window->Draw(*s);
+	for (auto sprite : m_spriteComponents) m_window->Draw(*sprite);
 
 	if (m_window->IsDebug()) m_world.DrawDebugData();
 
 	m_window->EndDraw();
-
 }

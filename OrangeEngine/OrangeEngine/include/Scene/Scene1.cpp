@@ -4,13 +4,12 @@
 #include <string>
 
 #include "Scene1.h"
-#include "../Manager/TextureManager.h"
+#include "../Manager/AssetManager.h"
 #include "../Utility/Util.h"
 
 // Default constructor.
 Scene1::Scene1() {}
 
-// Constructor.
 Scene1::Scene1(sf::RenderWindow& window) :
 	m_origin({ 0, 0 }),
 	m_doorTileIndices({ 0, 0 }) {
@@ -59,7 +58,7 @@ Scene1::Scene1(sf::RenderWindow& window) :
 }
 
 int Scene1::AddTile(std::string fileName, TILE tileType) {
-	int textureID = TextureManager::AddTexture(fileName);
+	int textureID = AssetManager::AddTexture(fileName);
 	if (textureID < 0) return -1; // Failed
 	else m_textureIDs[static_cast<int>(tileType)] = textureID;
 	return textureID;
@@ -73,26 +72,6 @@ bool Scene1::IsSolid(int i, int j) {
 	else return false;
 }
 
-sf::Vector2f Scene1::GetRandomSpawnLocationForTile(TILE tile)
-{
-	int columnIndex(0), rowIndex(0);
-
-	while (GetTileType(columnIndex, rowIndex) != tile) {
-		columnIndex = std::rand() % GRID_WIDTH;
-		rowIndex = std::rand() % GRID_HEIGHT;
-	}
-
-	return GetTilePosition(columnIndex, rowIndex);
-}
-
-sf::Vector2f Scene1::GetTilePosition(int columnIndex, int rowIndex)
-{
-	sf::Vector2f position;
-	position.x = m_origin.x + (columnIndex * TILE_SIZE) + (TILE_SIZE / 2);
-	position.y = m_origin.y + (rowIndex * TILE_SIZE) + (TILE_SIZE / 2);
-	return position;
-}
-
 TILE Scene1::GetTileType(int columnIndex, int rowIndex) const {
 	if ((columnIndex >= GRID_WIDTH) || (rowIndex >= GRID_HEIGHT)) return TILE::EMPTY;
 	return m_grid[columnIndex][rowIndex].type;
@@ -103,7 +82,7 @@ void Scene1::SetTile(int columnIndex, int rowIndex, TILE tileType) {
 	if (tileType >= TILE::COUNT) return;
 
 	m_grid[columnIndex][rowIndex].type = tileType;
-	m_grid[columnIndex][rowIndex].sprite.setTexture(TextureManager::GetTexture(m_textureIDs[static_cast<int>(tileType)]));
+	m_grid[columnIndex][rowIndex].sprite.setTexture(AssetManager::GetTexture(m_textureIDs[static_cast<int>(tileType)]));
 }
 
 bool Scene1::TileIsValid(int column, int row) {
@@ -133,7 +112,32 @@ Tile* Scene1::GetTile(int columnIndex, int rowIndex) {
 	else return nullptr;
 }
 
+sf::Vector2f Scene1::GetRandomSpawnLocation(bool floor) {
+	int columnIndex(0), rowIndex(0);
+	bool usedPosition = true;
+
+	while ((IsFloor(columnIndex, rowIndex) == floor) || usedPosition) {
+		columnIndex = std::rand() % GRID_WIDTH;
+		rowIndex = std::rand() % GRID_HEIGHT;
+		usedPosition = m_spawnPositions.find(std::pair<int, int>(columnIndex, rowIndex)) != m_spawnPositions.end();
+	}
+
+	m_spawnPositions.insert(std::pair<int, int>(columnIndex, rowIndex));
+
+	return GetTilePosition(columnIndex, rowIndex);
+}
+
+sf::Vector2f Scene1::GetTilePosition(int columnIndex, int rowIndex) {
+	sf::Vector2f position;
+	position.x = m_origin.x + (columnIndex * TILE_SIZE) + (TILE_SIZE / 2);
+	position.y = m_origin.y + (rowIndex * TILE_SIZE) + (TILE_SIZE / 2);
+	return position;
+}
+
 sf::Vector2f Scene1::GenerateScene1(b2World& world) {
+
+	m_spawnPositions.clear();
+
 	for (int i = 0; i < GRID_WIDTH; ++i) {
 		for (int j = 0; j < GRID_HEIGHT; ++j) {
 			if ((i % 2 != 0) && (j % 2 != 0)) {
@@ -141,7 +145,7 @@ sf::Vector2f Scene1::GenerateScene1(b2World& world) {
 			}
 			else {
 				m_grid[i][j].type = TILE::WALL_TOP;
-				m_grid[i][j].sprite.setTexture(TextureManager::GetTexture(m_textureIDs[static_cast<int>(TILE::WALL_TOP)]));
+				m_grid[i][j].sprite.setTexture(AssetManager::GetTexture(m_textureIDs[static_cast<int>(TILE::WALL_TOP)]));
 			}
 			m_grid[i][j].sprite.setPosition(m_origin.x + (TILE_SIZE * i), m_origin.y + (TILE_SIZE * j));
 
@@ -175,6 +179,7 @@ sf::Vector2f Scene1::GenerateEntryExit() {
 	SetTile(startI, GRID_HEIGHT - 1, TILE::WALL_ENTRANCE);
 	SetTile(endI, 0, TILE::WALL_DOOR_LOCKED);
 	m_doorTileIndices = { endI, 0 };
+	m_spawnPositions.insert(std::pair<int, int>(startI, GRID_HEIGHT - 2));
 	return GetTilePosition(startI, GRID_HEIGHT - 2);
 }
 
@@ -192,7 +197,7 @@ void Scene1::CalculateTextures(b2World& world) {
 				if (IsWall(i, j + 1)) value += 4;
 				if (IsWall(i - 1, j)) value += 8;
 				m_grid[i][j].type = static_cast<TILE>(value);
-				m_grid[i][j].sprite.setTexture(TextureManager::GetTexture(m_textureIDs[value]));
+				m_grid[i][j].sprite.setTexture(AssetManager::GetTexture(m_textureIDs[value]));
 
 				auto posX = m_grid[i][j].sprite.getPosition().x + m_grid[i][j].sprite.getTexture()->getSize().x / 2.0f;
 				auto posY = m_grid[i][j].sprite.getPosition().y + m_grid[i][j].sprite.getTexture()->getSize().y / 2.0f;
@@ -225,14 +230,14 @@ void Scene1::CreatePath(int columnIndex, int rowIndex) {
 			if (tile->type == TILE::EMPTY) {
 				// Mark the tile as floor.
 				tile->type = TILE::FLOOR;
-				tile->sprite.setTexture(TextureManager::GetTexture(m_textureIDs[static_cast<int>(TILE::FLOOR)]));
+				tile->sprite.setTexture(AssetManager::GetTexture(m_textureIDs[static_cast<int>(TILE::FLOOR)]));
 
 				// Knock that wall down.
 				int ddx = currentTile->columnIndex + (directions[i].x / 2);
 				int ddy = currentTile->rowIndex + (directions[i].y / 2);
 				Tile* wall = &m_grid[ddx][ddy];
 				wall->type = TILE::FLOOR;
-				wall->sprite.setTexture(TextureManager::GetTexture(m_textureIDs[static_cast<int>(TILE::FLOOR)]));
+				wall->sprite.setTexture(AssetManager::GetTexture(m_textureIDs[static_cast<int>(TILE::FLOOR)]));
 
 				// Recursively call the function with the new tile.
 				CreatePath(dx, dy);
@@ -262,7 +267,7 @@ void Scene1::CreateRooms(int roomCount) {
 					// Check if the tile is not on an outer wall.
 					if ((newI != 0) && (newI != (GRID_WIDTH - 1)) && (newY != 0) && (newY != (GRID_HEIGHT - 1))) {
 						m_grid[newI][newY].type = TILE::FLOOR;
-						m_grid[newI][newY].sprite.setTexture(TextureManager::GetTexture(m_textureIDs[static_cast<int>(TILE::FLOOR)]));
+						m_grid[newI][newY].sprite.setTexture(AssetManager::GetTexture(m_textureIDs[static_cast<int>(TILE::FLOOR)]));
 					}
 				}
 			}

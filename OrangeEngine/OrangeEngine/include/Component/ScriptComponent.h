@@ -7,7 +7,7 @@
 #include <luaPlus.h>
 
 class ComponentManager;
-
+class BaseComponent;
 using namespace LuaPlus;
 
 class ScriptComponent : public BaseComponent
