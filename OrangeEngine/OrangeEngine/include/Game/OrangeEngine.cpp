@@ -35,7 +35,7 @@ OrangeEngine::OrangeEngine(std::shared_ptr<Window> windowprt) :
 	for (int i = 0; i < 5; ++i) {
 		auto index = SetupGameObject("resource/spr_torch.png", "resource/sounds/snd_fire.wav", 0, false, 5);
 		m_gameObjects[index]->GetSoundComponent()->SetSoundLooping(true);
-		m_gameObjects[index]->GetScriptComponent()->loadScriptFile("1.lua");
+		m_gameObjects[index]->GetScriptComponent()->loadScriptFile("..\\resource//1.lua");
 		m_gameObjects[index]->SetName(std::string(TORCH));
 	}
 

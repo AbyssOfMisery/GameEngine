@@ -1,2 +1,10 @@
 ﻿  ScriptComponent.cpp
-  OrangeEngine.vcxproj -> C:\Users\Tech\Documents\GitHub\GameEngine\OrangeEngine\Release\OrangeEngine.exe
+c:\users\lucianz\documents\github\gameengine\orangeengine\orangeengine\include\component\scriptcomponent.cpp(34): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'lua_Integer'
+  c:\users\lucianz\documents\github\gameengine\orangeengine\orangeengine\include\component\scriptcomponent.cpp(34): note: consider using '%lld' in the format string
+  c:\users\lucianz\documents\github\gameengine\orangeengine\orangeengine\include\component\scriptcomponent.cpp(34): note: consider using '%I64d' in the format string
+  OrangeEngine.cpp
+c:\users\lucianz\documents\github\gameengine\orangeengine\orangeengine\include\game\orangeengine.cpp(12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\lucianz\documents\github\gameengine\orangeengine\orangeengine\include\game\orangeengine.cpp(52): warning C4244: 'argument': conversion from 'const float' to 'unsigned int', possible loss of data
+c:\users\lucianz\documents\github\gameengine\orangeengine\orangeengine\include\game\orangeengine.cpp(60): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
+  OrangeEngine.vcxproj -> C:\Users\LucianZ\Documents\GitHub\GameEngine\OrangeEngine\Release\OrangeEngine.exe
