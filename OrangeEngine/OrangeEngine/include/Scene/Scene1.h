@@ -39,29 +39,29 @@ public:
 
 	/**
 	* Returns true if the given tile index is solid.
-	*/
-	bool IsSolid(int columnIndex, int rowIndex);
-
-	/**
-	* Returns a to-pixel coordinate for spawning a game object
-	*/
-	sf::Vector2f GetRandomSpawnLocation(bool floor = true);
-
-	/**
-	* Returns the screen position of the tile
-	*/
-	sf::Vector2f GetTilePosition(int columnIndex, int rowIndex);
-
-	/**
-	* Sets the index of a given tile in the 2D game grid.
-	* This also changes the tile sprite, and is how tiles should be changed and set manually.
-	*/
-	void SetTile(int columnIndex, int rowIndex, TILE tileType);
-
-	/**
-	* Gets the index of the given tile.
-	*/
-	TILE GetTileType(int columnIndex, int rowIndex) const;
+	//*/
+	//bool IsSolid(int columnIndex, int rowIndex);
+	//
+	///**
+	//* Returns a to-pixel coordinate for spawning a game object
+	//*/
+	//sf::Vector2f GetRandomSpawnLocation(bool floor = true);
+	//
+	///**
+	//* Returns the screen position of the tile
+	//*/
+	//sf::Vector2f GetTilePosition(int columnIndex, int rowIndex);
+	//
+	///**
+	//* Sets the index of a given tile in the 2D game grid.
+	//* This also changes the tile sprite, and is how tiles should be changed and set manually.
+	//*/
+	//void SetTile(int columnIndex, int rowIndex, TILE tileType);
+	//
+	///**
+	//* Gets the index of the given tile.
+	//*/
+	//TILE GetTileType(int columnIndex, int rowIndex) const;
 
 	/**
 	* Generate a random level.
@@ -69,45 +69,45 @@ public:
 	*/
 	sf::Vector2f GenerateScene1(b2World& world);
 
-	/**
-	* Gets the tile at the given position.
-	*/
-	Tile* GetTile(sf::Vector2f position);
-
-	/**
-	* Gets the tile at the given position in the level array.
-	*/
-	Tile* GetTile(int columnIndex, int rowIndex);
-
-	/**
-	* Checks if a given tile is valid.
-	*/
-	bool TileIsValid(int columnIndex, int rowIndex);
-
-	/**
-	* Unlocks the door in the level.
-	*/
-	void UnlockDoor();
-
-	/**
-	* Return true if the given tile is a floor tile.
-	*/
-	bool IsFloor(int columnIndex, int rowIndex);
-
-	/**
-	* Return true if the given tile is a floor tile.
-	*/
-	bool IsFloor(const Tile& tile);
-
-	/**
-	* Returns the size of the tiles in the level.
-	*/
-	int GetTileSize() const;
-
-	/**
-	* Adds a tile to the level.
-	* These tiles are essentially sprites with a unique index. Once added, they can be loaded via the LoadLevelFromFile() function by including its index in the level data.
-	*/
+	///**
+	//* Gets the tile at the given position.
+	//*/
+	//Tile* GetTile(sf::Vector2f position);
+	//
+	///**
+	//* Gets the tile at the given position in the level array.
+	//*/
+	//Tile* GetTile(int columnIndex, int rowIndex);
+	//
+	///**
+	//* Checks if a given tile is valid.
+	//*/
+	//bool TileIsValid(int columnIndex, int rowIndex);
+	//
+	///**
+	//* Unlocks the door in the level.
+	//*/
+	//void UnlockDoor();
+	//
+	///**
+	//* Return true if the given tile is a floor tile.
+	//*/
+	//bool IsFloor(int columnIndex, int rowIndex);
+	//
+	///**
+	//* Return true if the given tile is a floor tile.
+	//*/
+	//bool IsFloor(const Tile& tile);
+	//
+	///**
+	//* Returns the size of the tiles in the level.
+	//*/
+	//int GetTileSize() const;
+	//
+	///**
+	//* Adds a tile to the level.
+	//* These tiles are essentially sprites with a unique index. Once added, they can be loaded via the LoadLevelFromFile() function by including its index in the level data.
+	//*/
 	int AddTile(std::string fileName, TILE tileType);
 
 private:
@@ -115,34 +115,34 @@ private:
 	/**
 	* Creates a path between two nodes in the recursive backtracker algorithm.
 	*/
-	void CreatePath(int columnIndex, int rowIndex);
-
-	/**
-	* Adds a given number of randomly sized rooms to the level to create some
-	open space.
-	*/
-	void CreateRooms(int roomCount);
-
-	/**
-	* Calculates the correct texture for each tile in the level.
-	*/
-	void CalculateTextures(b2World& world);
-
-	/**
-	* Generates an entry and exit point for the given level.
-	* return one tile above entry location.
-	*/
-	sf::Vector2f GenerateEntryExit();
-
-	/**
-	* Draws the level grid to the provided render window.
-	*/
+	//void CreatePath(int columnIndex, int rowIndex);
+	//
+	///**
+	//* Adds a given number of randomly sized rooms to the level to create some
+	//open space.
+	//*/
+	//void CreateRooms(int roomCount);
+	//
+	///**
+	//* Calculates the correct texture for each tile in the level.
+	//*/
+	//void CalculateTextures(b2World& world);
+	//
+	///**
+	//* Generates an entry and exit point for the given level.
+	//* return one tile above entry location.
+	//*/
+	//sf::Vector2f GenerateEntryExit();
+	//
+	///**
+	//* Draws the level grid to the provided render window.
+	//*/
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-
-	/**
-	* Checks if a given tile is a wall block.
-	*/
-	bool IsWall(int columnIndex, int rowIndex);
+	//
+	///**
+	//* Checks if a given tile is a wall block.
+	//*/
+	//bool IsWall(int columnIndex, int rowIndex);
 
 private:
 	/**

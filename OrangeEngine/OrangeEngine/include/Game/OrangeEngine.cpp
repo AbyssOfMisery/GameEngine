@@ -23,7 +23,7 @@ OrangeEngine::OrangeEngine(std::shared_ptr<Window> windowprt) :
 
 	// Setup Player
 	SetupGameObject("resource/players/mage/spr_mage_", "", PLAYER, true, ANIMATION_FRAMES, true);
-    m_gameObjects[0]->GetScriptComponent()->loadScriptFile("test.lua", lua);
+   // m_gameObjects[0]->GetScriptComponent()->loadScriptFile("test.lua", lua);
 
 	// Setup Key
 	SetupGameObject("resource/loot/key/spr_pickup_key.png", "resource/sounds/snd_key_pickup.wav", DOOR_KEY, false);
@@ -42,11 +42,11 @@ OrangeEngine::OrangeEngine(std::shared_ptr<Window> windowprt) :
 
 	// Setup Collision callbacks
 	m_newLevelCallback = [&](void *ptr) { m_generateNewLevel = true; };
-	m_unlockDoorCallback = [&](void *ptr) { m_Scene.UnlockDoor(); m_gameObjects[(int)ptr]->GetSoundComponent()->PlaySound(); m_gameObjects[(int)ptr]->Deactivate(); };
+	//m_unlockDoorCallback = [&](void *ptr) { m_Scene.UnlockDoor(); m_gameObjects[(int)ptr]->GetSoundComponent()->PlaySound(); m_gameObjects[(int)ptr]->Deactivate(); };
 	m_collectScoreCallback = [&](void *ptr) { printf("score picked up\n"); m_gameObjects[(int)ptr]->GetSoundComponent()->PlaySound(); m_gameObjects[(int)ptr]->Deactivate(); };
 
 	m_collisionListener.SetCollisionCallback(PLAYER | UNLOCKED_DOOR, m_newLevelCallback);
-	m_collisionListener.SetCollisionCallback(PLAYER | DOOR_KEY, m_unlockDoorCallback);
+	//m_collisionListener.SetCollisionCallback(PLAYER | DOOR_KEY, m_unlockDoorCallback);
 	m_collisionListener.SetCollisionCallback(PLAYER | SCORE, m_collectScoreCallback);
 
 	// Limit Framerate
@@ -61,7 +61,7 @@ void OrangeEngine::SetupNewLevel() {
 	for (auto i = 1; i < m_gameObjects.size(); ++i) {
 		m_gameObjects[i]->Activate();
 		bool torch = m_gameObjects[i]->GetName() == std::string(TORCH);
-		m_gameObjects[i]->GetPhysicsComponent()->SetPosition(m_Scene.GetRandomSpawnLocation(torch));
+		//m_gameObjects[i]->GetPhysicsComponent()->SetPosition(m_Scene.GetRandomSpawnLocation(torch));
 	}
 }
 
@@ -139,7 +139,7 @@ void OrangeEngine::Update() {
 
 	m_world.Step(TIME_STEP, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::U)) m_Scene.UnlockDoor();
+	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::U)) m_Scene.UnlockDoor();
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::R)) m_generateNewLevel = true;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::M)) SetChangeScene(true);
 }

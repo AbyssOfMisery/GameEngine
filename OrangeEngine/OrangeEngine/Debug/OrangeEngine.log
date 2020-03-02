@@ -1,5 +1,8 @@
-﻿  OrangeEngine.cpp
+﻿  ScriptComponent.cpp
+  OrangeEngine.cpp
 c:\users\family\documents\gameengine\orangeengine\orangeengine\include\game\orangeengine.cpp(13): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
 c:\users\family\documents\gameengine\orangeengine\orangeengine\include\game\orangeengine.cpp(53): warning C4244: 'argument': conversion from 'const float' to 'unsigned int', possible loss of data
 c:\users\family\documents\gameengine\orangeengine\orangeengine\include\game\orangeengine.cpp(61): warning C4018: '<': signed/unsigned mismatch
-  OrangeEngine.vcxproj -> C:\Users\Family\Documents\GameEngine\OrangeEngine\Debug\OrangeEngine.exe
+  Generating Code...
+OrangeEngine.obj : error LNK2019: unresolved external symbol "public: void __thiscall ScriptComponent::loadScriptFile(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,class sol::state &)" (?loadScriptFile@ScriptComponent@@QAEXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AAVstate@sol@@@Z) referenced in function "public: __thiscall OrangeEngine::OrangeEngine(class std::shared_ptr<class Window>)" (??0OrangeEngine@@QAE@V?$shared_ptr@VWindow@@@std@@@Z)
+C:\Users\Family\Documents\GameEngine\OrangeEngine\Debug\OrangeEngine.exe : fatal error LNK1120: 1 unresolved externals
