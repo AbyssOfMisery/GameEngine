@@ -7,6 +7,7 @@ OrangeEngine::OrangeEngine(std::shared_ptr<Window> windowprt) :
 	SceneManager(windowprt), m_world(b2Vec2(0, 0)), m_generateNewLevel(true),
 	m_debugDraw(*m_window->GetRenderWindow())
 {
+	lua.open_libraries(sol::lib::base);
 	m_clock.restart();
 	m_previousTime = m_clock.getElapsedTime();
 	srand(time(nullptr));
@@ -22,7 +23,7 @@ OrangeEngine::OrangeEngine(std::shared_ptr<Window> windowprt) :
 
 	// Setup Player
 	SetupGameObject("resource/players/mage/spr_mage_", "", PLAYER, true, ANIMATION_FRAMES, true);
-	
+    m_gameObjects[0]->GetScriptComponent()->loadScriptFile("test.lua", lua);
 
 	// Setup Key
 	SetupGameObject("resource/loot/key/spr_pickup_key.png", "resource/sounds/snd_key_pickup.wav", DOOR_KEY, false);
@@ -31,11 +32,11 @@ OrangeEngine::OrangeEngine(std::shared_ptr<Window> windowprt) :
 	for (int i = 0; i < 15; ++i)
 		SetupGameObject("resource/loot/gem/spr_pickup_gem.png", "resource/sounds/snd_gem_pickup.wav", SCORE, false);
 
+
 	// Setup Torches
 	for (int i = 0; i < 5; ++i) {
 		auto index = SetupGameObject("resource/spr_torch.png", "resource/sounds/snd_fire.wav", 0, false, 5);
 		m_gameObjects[index]->GetSoundComponent()->SetSoundLooping(true);
-		m_gameObjects[index]->GetScriptComponent()->loadScriptFile("1.lua");
 		m_gameObjects[index]->SetName(std::string(TORCH));
 	}
 
@@ -130,7 +131,7 @@ void OrangeEngine::Update() {
 	for (auto animator : m_animatorComponents) animator->Update(deltaTime.asSeconds());
 	for (auto sprite : m_spriteComponents) sprite->Update(deltaTime.asSeconds());
 	for (auto sound : m_soundComponents) sound->Update(deltaTime.asSeconds());
-	for (auto scripts : m_scriptComponents) scripts->Update(deltaTime.asSeconds());
+	//for (auto scripts : m_scriptComponents) scripts->Update(deltaTime.asSeconds());
 
 	auto playerPosition = m_gameObjects[0]->GetPhysicsComponent()->GetPosition();
 	m_window->MoveView(playerPosition);

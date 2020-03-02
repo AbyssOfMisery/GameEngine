@@ -7,7 +7,9 @@
 #include "../Collision/PhysicsCollisionListener.h"
 #include "../Debug/SFMLDebugDraw.h"
 #include "../Manager/ComponentManager.h"
-
+#include "../Utility/Util.h"
+#define SOL_ALL_SAFETIES_ON 1
+#include "../sol/sol.hpp"
 class OrangeEngine : public SceneManager {
 public:
 	OrangeEngine(std::shared_ptr<Window> windowprt);
@@ -19,7 +21,7 @@ public:
 	virtual void RestartClock();
 
 	sf::Time GetElapsed();
-
+	sol::state lua;
 private:
 
 	void SetupNewLevel();

@@ -125,11 +125,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)LibraryPath\Box2D\include;$(ProjectDir)LibraryPath\LuaPlus;$(ProjectDir)LibraryPath\SFML-2.5.1\include;$(ProjectDir)LibraryPath\LuaPlus\src;$(ProjectDir)LibraryPath\NativeFileDialog\include;$(SolutionDir)LibraryPath\IMGUI;$(SolutionDir)LibraryPath\Nlohmann;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)Lib\LuaPlus;$(ProjectDir)Lib\IMGUI\lib;$(ProjectDir)Lib\NativeFileDialog\lib;$(ProjectDir)Lib\SFML-2.5.1\lib;$(ProjectDir)Lib\Box2D\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)LibraryPath;$(ProjectDir)LibraryPath\LuaPlus;$(ProjectDir)LibraryPath\SFML-2.5.1\include;$(ProjectDir)LibraryPath\LuaPlus\src;$(ProjectDir)LibraryPath\NativeFileDialog\include;$(ProjectDir)LibraryPath\IMGUI;$(ProjectDir)LibraryPath\Nlohmann;$(ProjectDir)LibraryPath\Box2D;$(ProjectDir)LibraryPath\sol;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)Lib\LuaPlus;$(ProjectDir)Lib\SFML-2.5.1\lib;$(ProjectDir)Lib\NativeFileDialog\lib;$(ProjectDir)Lib\IMGUI\lib;$(ProjectDir)Lib\Box2D\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(ProjectDir)LibraryPath;$(ProjectDir)LibraryPath\LuaPlus;$(ProjectDir)LibraryPath\SFML-2.5.1\include;$(ProjectDir)LibraryPath\LuaPlus\src;$(ProjectDir)LibraryPath\NativeFileDialog\include;$(ProjectDir)LibraryPath\IMGUI;$(ProjectDir)LibraryPath\Nlohmann;$(ProjectDir)LibraryPath\Box2D;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)LibraryPath;$(ProjectDir)LibraryPath\LuaPlus;$(ProjectDir)LibraryPath\SFML-2.5.1\include;$(ProjectDir)LibraryPath\LuaPlus\src;$(ProjectDir)LibraryPath\NativeFileDialog\include;$(ProjectDir)LibraryPath\IMGUI;$(ProjectDir)LibraryPath\Nlohmann;$(ProjectDir)LibraryPath\Box2D;$(ProjectDir)LibraryPath\sol;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)Lib\LuaPlus;$(ProjectDir)Lib\SFML-2.5.1\lib;$(ProjectDir)Lib\NativeFileDialog\lib;$(ProjectDir)Lib\IMGUI\lib;$(ProjectDir)Lib\Box2D\lib;$(LibraryPath)</LibraryPath>
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
@@ -149,13 +149,12 @@
       </SDLCheck>
       <ConformanceMode>false</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)LibraryPath\Box2D\include;$(ProjectDir)LibraryPath\LuaPlus;$(ProjectDir)LibraryPath\LuaPlus\src;$(ProjectDir)LibraryPath\NativeFileDialog\include;$(SolutionDir)LibraryPath\IMGUI;$(SolutionDir)LibraryPath\Nlohmann;$(ProjectDir)LibraryPath\SFML-2.5.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>
-      </LanguageStandard>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;SFML_STATIC ;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader />
     </ClCompile>
     <Link>
-      <AdditionalDependencies>Box2D.lib;LuaPlus.lib;opengl32.lib;glfw3.lib;nfd_d.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>LuaPlus.lib;Box2D.lib;opengl32.lib;glfw3.lib;nfd_d.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>
       </AdditionalLibraryDirectories>
       <SubSystem>Console</SubSystem>
