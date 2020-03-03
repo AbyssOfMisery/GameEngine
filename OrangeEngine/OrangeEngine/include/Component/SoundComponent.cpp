@@ -1,15 +1,16 @@
 #include "SoundComponent.h"
 #include "../Manager/AssetManager.h"
 
-SoundComponent::SoundComponent(ComponentManager& obj, int soundID) :
+SoundComponent::SoundComponent(GameObject& obj, int soundID) :
 	BaseComponent(obj),
 	m_sound(AssetManager::GetSoundBuffer(soundID))
 {
+	componentName = "SoundComponent";
 	m_sound.setMinDistance(80.0f);
 	m_sound.setAttenuation(10.0f);
 }
 
-SoundComponent::SoundComponent(ComponentManager& obj, sf::SoundBuffer& soundBuffer) :
+SoundComponent::SoundComponent(GameObject& obj, sf::SoundBuffer& soundBuffer) :
 	BaseComponent(obj),
 	m_sound(soundBuffer)
 {

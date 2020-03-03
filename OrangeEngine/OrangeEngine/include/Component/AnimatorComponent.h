@@ -11,7 +11,7 @@ class AnimationComponent;
 
 class AnimatorComponent : public BaseComponent {
 public:
-	AnimatorComponent(ComponentManager& obj);
+	AnimatorComponent(GameObject& obj);
 
 	void Update(float timeDelta);
 

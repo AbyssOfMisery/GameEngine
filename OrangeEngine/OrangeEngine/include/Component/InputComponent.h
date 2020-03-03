@@ -4,7 +4,7 @@
 #include <map>
 
 #include "../Utility/Enums.h"
-#include "../Manager/ComponentManager.h"
+#include "../Actor/GameObject.h"
 #include "../Component/Command.h"
 #include "BaseComponent.h"
 
@@ -15,7 +15,7 @@ class InputComponent : public BaseComponent{
 
 public:
 
-	InputComponent(ComponentManager& obj);
+	InputComponent(GameObject& obj);
 	~InputComponent() {};
 
 	void BindKey(KEY key, sf::Keyboard::Key keyToBind);

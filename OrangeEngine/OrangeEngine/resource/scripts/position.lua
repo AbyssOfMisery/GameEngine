@@ -1,0 +1,1 @@
+SetPositions(PhysicsComponent,200,200);

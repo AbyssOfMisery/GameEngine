@@ -1,13 +1,15 @@
 #include "../Component/AnimationComponent.h"
 #include "../Manager/AssetManager.h"
 
-AnimationComponent::AnimationComponent(ComponentManager & obj, sf::Texture & texture, int animationSpeed) :
+AnimationComponent::AnimationComponent(GameObject & obj, sf::Texture & texture, int animationSpeed) :
 	BaseComponent(obj),
 	m_texure(texture),
 	m_animationSpeed(animationSpeed),
 	m_progress(0),
 	m_currentFrame(0)
-{}
+{
+	componentName = "AnimationComponent";
+}
 
 void AnimationComponent::Update(float timeDelta) {
 	if (!IsActive()) return;

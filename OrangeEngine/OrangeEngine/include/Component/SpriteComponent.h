@@ -2,12 +2,12 @@
 #define SPRITECOMPONENT_H
 
 #include <memory>
-#include "../Manager/ComponentManager.h"
+#include "../Actor/GameObject.h"
 #include "BaseComponent.h"
 
 class SpriteComponent : public BaseComponent, public sf::Drawable {
 public:
-	SpriteComponent(ComponentManager& obj);
+	SpriteComponent(GameObject& obj);
 	
 	void Update(float timeDelta);
 

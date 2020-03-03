@@ -3,14 +3,14 @@
 
 #include <vector>
 #include "../Utility/Util.h"
-#include "../Manager/ComponentManager.h"
+#include "../Actor/GameObject.h"
 #include "../Component/BaseComponent.h"
 
 class BaseComponent;
 
 class AnimationComponent : public BaseComponent {
 public:
-	AnimationComponent(ComponentManager& obj, sf::Texture& texture, int animationSpeed = ANIMATION_SPEED);
+	AnimationComponent(GameObject& obj, sf::Texture& texture, int animationSpeed = ANIMATION_SPEED);
 
 	void Update(float timeDelta);
 

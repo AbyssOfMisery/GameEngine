@@ -7,7 +7,7 @@ OrangeEngine::OrangeEngine(std::shared_ptr<Window> windowprt) :
 	SceneManager(windowprt), m_world(b2Vec2(0, 0)), m_generateNewLevel(true),
 	m_debugDraw(*m_window->GetRenderWindow())
 {
-	lua.open_libraries(sol::lib::base);
+	luaPlus.open_libraries(sol::lib::base);
 	m_clock.restart();
 	m_previousTime = m_clock.getElapsedTime();
 	srand(time(nullptr));
@@ -41,13 +41,13 @@ OrangeEngine::OrangeEngine(std::shared_ptr<Window> windowprt) :
 	}
 
 	// Setup Collision callbacks
-	m_newLevelCallback = [&](void *ptr) { m_generateNewLevel = true; };
+	//m_newLevelCallback = [&](void *ptr) { m_generateNewLevel = true; };
 	//m_unlockDoorCallback = [&](void *ptr) { m_Scene.UnlockDoor(); m_gameObjects[(int)ptr]->GetSoundComponent()->PlaySound(); m_gameObjects[(int)ptr]->Deactivate(); };
-	m_collectScoreCallback = [&](void *ptr) { printf("score picked up\n"); m_gameObjects[(int)ptr]->GetSoundComponent()->PlaySound(); m_gameObjects[(int)ptr]->Deactivate(); };
+	//m_collectScoreCallback = [&](void *ptr) { printf("score picked up\n"); m_gameObjects[(int)ptr]->GetSoundComponent()->PlaySound(); m_gameObjects[(int)ptr]->Deactivate(); };
 
-	m_collisionListener.SetCollisionCallback(PLAYER | UNLOCKED_DOOR, m_newLevelCallback);
+	//m_collisionListener.SetCollisionCallback(PLAYER | UNLOCKED_DOOR, m_newLevelCallback);
 	//m_collisionListener.SetCollisionCallback(PLAYER | DOOR_KEY, m_unlockDoorCallback);
-	m_collisionListener.SetCollisionCallback(PLAYER | SCORE, m_collectScoreCallback);
+	//m_collisionListener.SetCollisionCallback(PLAYER | SCORE, m_collectScoreCallback);
 
 	// Limit Framerate
 	m_window->GetRenderWindow()->setFramerateLimit(FPS);
@@ -66,7 +66,7 @@ void OrangeEngine::SetupNewLevel() {
 }
 
 int OrangeEngine::SetupGameObject(std::string texture, std::string sound, uint16 physicsCategory, bool isEntity, int frames, bool isPlayer) {
-	std::shared_ptr<ComponentManager> object = std::make_shared<ComponentManager>();
+	std::shared_ptr<GameObject> object = std::make_shared<GameObject>();
 	b2Body* body = isEntity ? CreateCirclePhysicsBody(m_world, { 0, 0 }, 0.5f, b2_dynamicBody) :
 		CreateSquarePhysicsBody(m_world, { 0, 0 }, { 0.45f, 0.45f }, b2_dynamicBody);
 	b2Filter filter = body->GetFixtureList()->GetFilterData();
@@ -77,8 +77,8 @@ int OrangeEngine::SetupGameObject(std::string texture, std::string sound, uint16
 
 	object->SetSpriteComponent(std::make_shared<SpriteComponent>(*object));
 	object->SetAnimatorComponent(std::make_shared<AnimatorComponent>(*object));
-	object->SetPhysicsComponent(std::make_shared<PhysicsComponent>(*object, body));
-	object->SetScriptComponent(std::make_shared<ScriptComponent>(*object));
+	object->SetPhysicsComponent(std::make_shared<PhysicsComponent>(luaPlus,*object, body));
+	object->SetScriptComponent(std::make_shared<ScriptComponent>("resource/scripts/position.lua", luaPlus,*object));
 
 	if (!sound.empty()) object->SetSoundComponent(std::make_shared<SoundComponent>(*object, AssetManager::AddSoundBuffer(sound)));
 	if (isEntity) {
@@ -100,11 +100,14 @@ int OrangeEngine::SetupGameObject(std::string texture, std::string sound, uint16
 	m_physicComponents.push_back(object->GetPhysicsComponent());
 	m_animatorComponents.push_back(object->GetAnimatorComponent());
 	m_spriteComponents.push_back(object->GetSpriteComponent());
-	m_scriptComponents.push_back(object->GetScriptComponent());
 	if (!sound.empty()) m_soundComponents.push_back(object->GetSoundComponent());
 	if (isEntity) {
 		m_healthComponents.push_back(object->GetHealthComponent());
-		if (isPlayer) m_inputComponents.push_back(object->GetInputComponent());
+		if (isPlayer) {
+			m_inputComponents.push_back(object->GetInputComponent());
+			m_scriptComponents.push_back(object->GetScriptComponent());
+		}
+	
 		// TODO: else !isPlayer m_aiComponents push_back entity->GetAIComponent()
 	}
 

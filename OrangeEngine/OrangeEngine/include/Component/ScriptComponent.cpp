@@ -2,11 +2,11 @@
 #include <iostream>
 
 
-ScriptComponent::ScriptComponent(ComponentManager& obj) :
+ScriptComponent::ScriptComponent(std::string _fileName, sol::state &_luaPlus, GameObject& obj) :
 	BaseComponent(obj)
 {
-	pLuaState = LuaPlus::LuaState::Create(true);
-
+	componentName = "ScriptComponent";
+	_luaPlus.script_file(_fileName);
 }
 
 

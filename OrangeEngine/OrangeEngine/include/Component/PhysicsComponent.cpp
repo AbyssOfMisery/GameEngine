@@ -1,9 +1,16 @@
 #include "PhysicsComponent.h"
 
-PhysicsComponent::PhysicsComponent(ComponentManager& obj, b2Body* body) :
+PhysicsComponent::PhysicsComponent(sol::state &_luaPlus,GameObject& obj, b2Body* body) :
 	BaseComponent(obj), 
 	m_body(body)
-{}
+{
+	componentName = "PhysicsComponent";
+	_luaPlus.set("PhysicsComponent", this);
+
+	//m_position = _luaPlus["position"];
+	_luaPlus["SetPositions"] = &PhysicsComponent::SetPositions;
+
+}
 
 void PhysicsComponent::Update(float timeDelta) {
 	m_body->SetActive(IsActive());
@@ -29,4 +36,11 @@ sf::Vector2f PhysicsComponent::GetPosition() const {
 void PhysicsComponent::SetPosition(sf::Vector2f position) {
 	m_position = position;
 	m_body->SetTransform({ position.x / PIXEL_PER_METER, position.y / PIXEL_PER_METER }, m_body->GetAngle());
+}
+
+void PhysicsComponent::SetPositions(float x, float y)
+{
+	m_position.x = x;
+	m_position.y = y;
+	m_body->SetTransform({ x / PIXEL_PER_METER, y / PIXEL_PER_METER }, m_body->GetAngle());
 }

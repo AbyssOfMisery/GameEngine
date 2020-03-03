@@ -1,7 +1,7 @@
 #ifndef SCRIPT_COMPONENT_H
 #define SCRIPT_COMPONENT_H
 
-#include "../Manager/ComponentManager.h"
+#include "../Actor/GameObject.h"
 #include "../Utility/Util.h"
 #include "BaseComponent.h"
 #include <luaPlus.h>
@@ -15,17 +15,14 @@ class ScriptComponent : public BaseComponent
 {
 public:
 	//ScriptComponent();
-	ScriptComponent(ComponentManager& obj);
+	ScriptComponent(std::string _fileName, sol::state &_luaPlus, GameObject& obj);
 	~ScriptComponent(void);
 
-	void loadScriptFile(std::string _fileName, sol::state &_lua);
-
 	virtual void Update(float dt);
-	bool fileLoaded = false;
 	sol::state lua;
 private:
 	std::vector<ComponentManager*>* obj;
-	LuaState* pLuaState;
+
 };
 
 #endif // !ScriptComponent_H

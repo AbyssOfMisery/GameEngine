@@ -2,15 +2,15 @@
 #define SOUNDCOMPONENT_H
 
 #include <SFML/Audio.hpp>
-#include "../Manager/ComponentManager.h"
+#include "../Actor/GameObject.h"
 #include "../Component/BaseComponent.h"
 
 class BaseComponent;
 
 class SoundComponent : public BaseComponent {
 public:
-	SoundComponent(ComponentManager& obj, int soundID);
-	SoundComponent(ComponentManager& obj, sf::SoundBuffer& soundBuffer);
+	SoundComponent(GameObject& obj, int soundID);
+	SoundComponent(GameObject& obj, sf::SoundBuffer& soundBuffer);
 
 	void Update(float timeDelta);
 

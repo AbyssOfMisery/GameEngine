@@ -1,7 +1,10 @@
 #include "AnimatorComponent.h"
 #include "../Manager/AssetManager.h"
 
-AnimatorComponent::AnimatorComponent(ComponentManager & obj) : BaseComponent(obj), m_currentAnimation(0) {}
+AnimatorComponent::AnimatorComponent(GameObject & obj) : BaseComponent(obj), m_currentAnimation(0)
+{
+	componentName = "AnimatorComponent";
+}
 
 void AnimatorComponent::Update(float timeDelta) {
 	if (!IsActive()) return;

@@ -1,18 +1,20 @@
 #ifndef BASE_COMPONENT_H
 #define BASE_COMPONENT_H
 
-class ComponentManager;
+#include <string>
+class GameObject;
 
 class BaseComponent {
 public:
-	BaseComponent(ComponentManager &obj) : m_gameObject(obj), m_active(true) {};
+	BaseComponent(GameObject &obj) : m_gameObject(obj), m_active(true) {};
 	virtual void Update(float timeDelta) = 0;
 
 	void SetActive(bool active) { m_active = active; }
 	bool IsActive() const { return m_active; }
 
+	std::string componentName;
 protected:
-	ComponentManager& m_gameObject;
+	GameObject& m_gameObject;
 	bool m_active;
 };
 

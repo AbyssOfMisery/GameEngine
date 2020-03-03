@@ -78,9 +78,6 @@
     <ClInclude Include="include\Debug\SFMLDebugDraw.h">
       <Filter>Header Files\Debug</Filter>
     </ClInclude>
-    <ClInclude Include="include\Manager\ComponentManager.h">
-      <Filter>Header Files\Manager</Filter>
-    </ClInclude>
     <ClInclude Include="include\Component\Command.h">
       <Filter>Header Files\Component</Filter>
     </ClInclude>
@@ -134,6 +131,9 @@
     </ClInclude>
     <ClInclude Include="include\Manager\AssetManager.h">
       <Filter>Header Files\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Actor\GameObject.h">
+      <Filter>Header Files\Actor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -200,9 +200,6 @@
     <ClCompile Include="include\Collision\PhysicsCollisionListener.cpp">
       <Filter>Source Files\Collision</Filter>
     </ClCompile>
-    <ClCompile Include="include\Manager\ComponentManager.cpp">
-      <Filter>Source Files\Manager</Filter>
-    </ClCompile>
     <ClCompile Include="include\Game\Menu.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
@@ -211,6 +208,9 @@
     </ClCompile>
     <ClCompile Include="include\Manager\AssetManager.cpp">
       <Filter>Source Files\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Actor\GameObject.cpp">
+      <Filter>Source Files\Actor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

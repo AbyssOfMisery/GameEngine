@@ -1,6 +1,8 @@
 #include "InputComponent.h"
 
-InputComponent::InputComponent(ComponentManager& obj): BaseComponent(obj) {
+InputComponent::InputComponent(GameObject& obj): BaseComponent(obj) {
+
+	componentName = "InputComponent";
 	// Default key binding
 	BindKey(KEY::KEY_LEFT, sf::Keyboard::A);
 	BindKey(KEY::KEY_RIGHT, sf::Keyboard::D);

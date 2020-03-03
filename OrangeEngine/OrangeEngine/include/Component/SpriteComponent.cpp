@@ -1,7 +1,8 @@
 #include "../Component/SpriteComponent.h"
 #include "../Manager/AssetManager.h"
 
-SpriteComponent::SpriteComponent(ComponentManager & obj) : BaseComponent(obj), m_sprite(nullptr) {
+SpriteComponent::SpriteComponent(GameObject & obj) : BaseComponent(obj), m_sprite(nullptr) {
+	componentName = "SpriteComponent";
 	m_sprite = std::make_shared<sf::Sprite>();
 }
 

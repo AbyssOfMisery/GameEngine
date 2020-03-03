@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Actor\GameObject.h" />
     <ClInclude Include="include\Collision\PhysicsCollisionListener.h" />
     <ClInclude Include="include\Component\AnimationComponent.h" />
     <ClInclude Include="include\Component\AnimatorComponent.h" />
@@ -33,7 +34,6 @@
     <ClInclude Include="include\Debug\SFMLDebugDraw.h" />
     <ClInclude Include="include\Game\Menu.h" />
     <ClInclude Include="include\Game\OrangeEngine.h" />
-    <ClInclude Include="include\Manager\ComponentManager.h" />
     <ClInclude Include="include\Manager\SceneManager.h" />
     <ClInclude Include="include\Manager\AssetManager.h" />
     <ClInclude Include="include\RenderWindow\Window.h" />
@@ -44,6 +44,7 @@
     <ClInclude Include="include\Utility\Util.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="include\Actor\GameObject.cpp" />
     <ClCompile Include="include\Collision\PhysicsCollisionListener.cpp" />
     <ClCompile Include="include\Component\AnimationComponent.cpp" />
     <ClCompile Include="include\Component\AnimatorComponent.cpp" />
@@ -62,7 +63,6 @@
     <ClCompile Include="include\Imgui\imgui_demo.cpp" />
     <ClCompile Include="include\Imgui\imgui_draw.cpp" />
     <ClCompile Include="include\Imgui\imgui_widgets.cpp" />
-    <ClCompile Include="include\Manager\ComponentManager.cpp" />
     <ClCompile Include="include\Manager\AssetManager.cpp" />
     <ClCompile Include="include\RenderWindow\Window.cpp" />
     <ClCompile Include="include\Scene\Scene1.cpp" />

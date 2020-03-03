@@ -6,8 +6,9 @@
 #include "../Scene/Scene1.h"
 #include "../Collision/PhysicsCollisionListener.h"
 #include "../Debug/SFMLDebugDraw.h"
-#include "../Manager/ComponentManager.h"
+#include "../Actor/GameObject.h"
 #include "../Utility/Util.h"
+#include <lua.h>
 #define SOL_ALL_SAFETIES_ON 1
 #include "../sol/sol.hpp"
 class OrangeEngine : public SceneManager {
@@ -21,7 +22,7 @@ public:
 	virtual void RestartClock();
 
 	sf::Time GetElapsed();
-	sol::state lua;
+	sol::state luaPlus;
 private:
 
 	void SetupNewLevel();
@@ -38,7 +39,7 @@ private:
 	SFMLDebugDraw m_debugDraw;
 
 
-	std::vector<std::shared_ptr<ComponentManager>> m_gameObjects;
+	std::vector<std::shared_ptr<GameObject>> m_gameObjects;
 
 	std::vector<std::shared_ptr<InputComponent>> m_inputComponents;
 	std::vector<std::shared_ptr<PhysicsComponent>> m_physicComponents;

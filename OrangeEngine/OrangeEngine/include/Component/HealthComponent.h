@@ -1,15 +1,15 @@
 #ifndef HealthComponent_h
 #define HealthComponent_h
 
-#include "../Manager/ComponentManager.h"
+#include "../Actor/GameObject.h"
 #include "BaseComponent.h"
 
 class BaseComponent;
 
 class HealthComponent : public BaseComponent {
 public:
-	HealthComponent(ComponentManager& obj) : BaseComponent(obj) {}
-	HealthComponent(ComponentManager& obj, int health) : BaseComponent(obj), m_health(health) {}
+	HealthComponent(GameObject& obj) : BaseComponent(obj) {}
+	HealthComponent(GameObject& obj, int health) : BaseComponent(obj), m_health(health) {}
 	~HealthComponent() {};
 
 	void Update(float timeDelta) {}
