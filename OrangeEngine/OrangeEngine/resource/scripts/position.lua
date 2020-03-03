@@ -1,1 +1,1 @@
-SetPositions(PhysicsComponent,200,200);
+SetPositions(PhysicsComponent,200,200)

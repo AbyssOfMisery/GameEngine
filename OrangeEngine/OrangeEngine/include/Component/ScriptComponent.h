@@ -15,9 +15,10 @@ class ScriptComponent : public BaseComponent
 {
 public:
 	//ScriptComponent();
-	ScriptComponent(std::string _fileName, sol::state &_luaPlus, GameObject& obj);
+	ScriptComponent( GameObject& obj);
 	~ScriptComponent(void);
 
+	void loadScript(std::string _fileName, sol::state &_luaPlus);
 	virtual void Update(float dt);
 	sol::state lua;
 private:
