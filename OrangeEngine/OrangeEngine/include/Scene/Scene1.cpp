@@ -113,25 +113,25 @@ int Scene1::AddTile(std::string fileName, TILE tileType) {
 //}
 //
 //sf::Vector2f Scene1::GetRandomSpawnLocation(bool floor) {
-//	//int columnIndex(0), rowIndex(0);
-//	//bool usedPosition = true;
-//	//
-//	//while ((IsFloor(columnIndex, rowIndex) == floor) || usedPosition) {
-//	//	columnIndex = std::rand() % GRID_WIDTH;
-//	//	rowIndex = std::rand() % GRID_HEIGHT;
-//	//	usedPosition = m_spawnPositions.find(std::pair<int, int>(columnIndex, rowIndex)) != m_spawnPositions.end();
-//	//}
-//	//
-//	//m_spawnPositions.insert(std::pair<int, int>(columnIndex, rowIndex));
-//	//
-//	//return GetTilePosition(columnIndex, rowIndex);
+//	int columnIndex(0), rowIndex(0);
+//	bool usedPosition = true;
+//	
+//	while ((IsFloor(columnIndex, rowIndex) == floor) || usedPosition) {
+//		columnIndex = std::rand() % GRID_WIDTH;
+//		rowIndex = std::rand() % GRID_HEIGHT;
+//		usedPosition = m_spawnPositions.find(std::pair<int, int>(columnIndex, rowIndex)) != m_spawnPositions.end();
+//	}
+//	
+//	m_spawnPositions.insert(std::pair<int, int>(columnIndex, rowIndex));
+//	
+//	return GetTilePosition(columnIndex, rowIndex);
 //}
 //
 //sf::Vector2f Scene1::GetTilePosition(int columnIndex, int rowIndex) {
-//	//sf::Vector2f position;
-//	//position.x = m_origin.x + (columnIndex * TILE_SIZE) + (TILE_SIZE / 2);
-//	//position.y = m_origin.y + (rowIndex * TILE_SIZE) + (TILE_SIZE / 2);
-//	//return position;
+//	sf::Vector2f position;
+//	position.x = m_origin.x + (columnIndex * TILE_SIZE) + (TILE_SIZE / 2);
+//	position.y = m_origin.y + (rowIndex * TILE_SIZE) + (TILE_SIZE / 2);
+//	return position;
 //}
 
 sf::Vector2f Scene1::GenerateScene1(b2World& world) {

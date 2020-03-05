@@ -1,4 +1,4 @@
 ﻿  OrangeEngine.cpp
 c:\users\lucianz\documents\github\gameengine\orangeengine\orangeengine\include\game\orangeengine.cpp(13): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-c:\users\lucianz\documents\github\gameengine\orangeengine\orangeengine\include\game\orangeengine.cpp(53): warning C4244: 'argument': conversion from 'const float' to 'unsigned int', possible loss of data
+c:\users\lucianz\documents\github\gameengine\orangeengine\orangeengine\include\game\orangeengine.cpp(56): warning C4244: 'argument': conversion from 'const float' to 'unsigned int', possible loss of data
   OrangeEngine.vcxproj -> C:\Users\LucianZ\Documents\GitHub\GameEngine\OrangeEngine\Debug\OrangeEngine.exe

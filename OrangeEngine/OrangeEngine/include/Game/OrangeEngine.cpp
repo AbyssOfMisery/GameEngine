@@ -23,7 +23,7 @@ OrangeEngine::OrangeEngine(std::shared_ptr<Window> windowprt) :
 
 	// Setup Player
 	SetupGameObject("resource/players/mage/spr_mage_", "", PLAYER, true, ANIMATION_FRAMES, true);
-	//m_gameObjects[0]->GetScriptComponent()->loadScript("resource/scripts/position.lua", luaPlus);
+	m_gameObjects[0]->GetScriptComponent()->loadScript("resource/scripts/position.lua", luaPlus);
 
 	// Setup Key
 	//SetupGameObject("resource/loot/key/spr_pickup_key.png", "resource/sounds/snd_key_pickup.wav", DOOR_KEY, false);
@@ -34,10 +34,13 @@ OrangeEngine::OrangeEngine(std::shared_ptr<Window> windowprt) :
 
 
 	// Setup Torches
+	for (int i = 0; i < 5; ++i) {
+		auto index = SetupGameObject("resource/spr_torch.png", "resource/sounds/snd_fire.wav", 0, false, 5,false);
+		m_gameObjects[index]->GetSoundComponent()->SetSoundLooping(true);
+		m_gameObjects[index]->SetName(std::string(TORCH));
+		m_gameObjects[index]->GetPhysicsComponent()->SetPosition(sf::Vector2f(0, 0));
+	}
 
-	SetupGameObject("resource/spr_torch.png", "resource/sounds/snd_fire.wav", 0, false, 5);
-	m_gameObjects[1]->GetSoundComponent()->SetSoundLooping(true);
-	m_gameObjects[1]->SetName(std::string(TORCH));
 	
 
 	// Setup Collision callbacks
@@ -59,9 +62,14 @@ void OrangeEngine::SetupNewLevel() {
 	m_generateNewLevel = false;
 	m_gameObjects[0]->GetScriptComponent()->loadScript("resource/scripts/position.lua", luaPlus);
 	m_gameObjects[0]->GetPhysicsComponent()->SetPosition(m_Scene.GenerateScene1(m_world));
-	m_gameObjects[1]->Activate();
-	bool torch = m_gameObjects[1]->GetName() == std::string(TORCH);
-		//m_gameObjects[i]->GetPhysicsComponent()->SetPosition(m_Scene.GetRandomSpawnLocation(torch));
+
+	for (int i = 1; i < 5; ++i)
+	{
+		m_gameObjects[i]->Activate();
+		bool torch = m_gameObjects[i]->GetName() == std::string(TORCH);
+		m_gameObjects[i]->GetPhysicsComponent()->SetPosition(sf::Vector2f(0,0));
+	}
+
 }
 
 int OrangeEngine::SetupGameObject(std::string texture, std::string sound, uint16 physicsCategory, bool isEntity, int frames, bool isPlayer) {
